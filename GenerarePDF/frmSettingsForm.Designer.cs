@@ -48,19 +48,20 @@
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(800, 259);
+            this.pnlContent.Size = new System.Drawing.Size(800, 136);
             this.pnlContent.TabIndex = 5;
             // 
             // ucTableSettings1
             // 
             this.ucTableSettings1.AutoSize = true;
+            this.ucTableSettings1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.ucTableSettings1.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucTableSettings1.Location = new System.Drawing.Point(0, 0);
             this.ucTableSettings1.Name = "ucTableSettings1";
-            this.ucTableSettings1.Size = new System.Drawing.Size(800, 67);
+            this.ucTableSettings1.Size = new System.Drawing.Size(800, 130);
             this.ucTableSettings1.TabIndex = 0;
-            this.ucTableSettings1.OnTableDeleted += new GenerarePDF.ucTableSettings.TableDeleted(this.ucTableSettings1_OnTableDeleted);
-            this.ucTableSettings1.OnTableAdded += new GenerarePDF.ucTableSettings.TableAdded(this.ucTableSettings1_OnTableAdded);
+            this.ucTableSettings1.OnTableDeleted += new GenerarePDF.ucTableSettings.TableDeleted(this.Table_OnTableDeleted);
+            this.ucTableSettings1.OnTableAdded += new GenerarePDF.ucTableSettings.TableAdded(this.Table_OnTableAdded);
             // 
             // frmSettingsForm
             // 

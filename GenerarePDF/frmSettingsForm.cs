@@ -17,24 +17,20 @@ namespace GenerarePDF
             InitializeComponent();
         }
 
-        private void ucTableSettings1_OnTableAdded(ucTableSettings item)
-        {
-
-        }
-
-        private void ucTableSettings1_OnTableDeleted(ucTableSettings item)
-        {
-
-        }
-
         private void AddTable()
         {
             ucTableSettings table = new ucTableSettings();
             table.OnTableAdded += Table_OnTableAdded; ;
             table.OnTableDeleted += Table_OnTableDeleted;
+            table.OnColumnSizeChanged += Table_OnColumnSizeChanged;
             pnlContent.Controls.Add(table);
             table.Dock = DockStyle.Bottom;
             pnlContent.Height += table.Height;
+        }
+
+        private void Table_OnColumnSizeChanged(int size)
+        {
+            pnlContent.Height += size;
         }
 
         private void Table_OnTableDeleted(ucTableSettings item)

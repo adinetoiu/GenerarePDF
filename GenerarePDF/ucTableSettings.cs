@@ -18,6 +18,9 @@ namespace GenerarePDF
         public delegate void TableAdded(ucTableSettings item);
         public event TableAdded OnTableAdded;
 
+        public delegate void ColumnSizeChanged(int size);
+        public event ColumnSizeChanged OnColumnSizeChanged;
+
         public ucTableSettings()
         {
             InitializeComponent();
@@ -26,6 +29,10 @@ namespace GenerarePDF
         private void Column_OnColumnDeleted(ucColumnSettings item)
         {
             grpName.Controls.Remove(item);
+            if (OnColumnSizeChanged != null)
+            {
+                OnColumnSizeChanged(-item.Height);
+            }
         }
 
         private void Column_OnColumnAdded(ucColumnSettings item)
@@ -48,6 +55,11 @@ namespace GenerarePDF
             grpName.Controls.Add(column);
             column.Dock = DockStyle.Bottom;
             grpName.Height += column.Height;
+
+            if (OnColumnSizeChanged != null)
+            {
+                OnColumnSizeChanged(column.Height);
+            }
         }
 
         private void btnAddTable_Click(object sender, EventArgs e)
