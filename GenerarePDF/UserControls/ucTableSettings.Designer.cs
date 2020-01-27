@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.grpName = new System.Windows.Forms.GroupBox();
+            this.ucColumnSettings1 = new GenerarePDF.ucColumnSettings();
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.Description = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.txtHeader = new System.Windows.Forms.TextBox();
             this.btnAddTable = new System.Windows.Forms.Button();
             this.btnRemoveGroup = new System.Windows.Forms.Button();
-            this.txtHeader = new System.Windows.Forms.TextBox();
-            this.txtDescription = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Description = new System.Windows.Forms.Label();
-            this.ucColumnSettings1 = new GenerarePDF.ucColumnSettings();
             this.grpName.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +50,16 @@
             this.grpName.Size = new System.Drawing.Size(784, 39);
             this.grpName.TabIndex = 0;
             this.grpName.TabStop = false;
+            // 
+            // ucColumnSettings1
+            // 
+            this.ucColumnSettings1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ucColumnSettings1.Location = new System.Drawing.Point(3, 10);
+            this.ucColumnSettings1.Name = "ucColumnSettings1";
+            this.ucColumnSettings1.Size = new System.Drawing.Size(778, 26);
+            this.ucColumnSettings1.TabIndex = 0;
+            this.ucColumnSettings1.OnColumnDeleted += new GenerarePDF.ucColumnSettings.ColumnDeleted(this.Column_OnColumnDeleted);
+            this.ucColumnSettings1.OnColumnAdded += new GenerarePDF.ucColumnSettings.ColumnAdded(this.Column_OnColumnAdded);
             // 
             // pnlTop
             // 
@@ -66,6 +76,39 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(784, 79);
             this.pnlTop.TabIndex = 1;
+            // 
+            // Description
+            // 
+            this.Description.AutoSize = true;
+            this.Description.Location = new System.Drawing.Point(3, 32);
+            this.Description.Name = "Description";
+            this.Description.Size = new System.Drawing.Size(73, 13);
+            this.Description.TabIndex = 5;
+            this.Description.Text = "Header Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Header Name";
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(151, 29);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(535, 44);
+            this.txtDescription.TabIndex = 3;
+            // 
+            // txtHeader
+            // 
+            this.txtHeader.Location = new System.Drawing.Point(151, 3);
+            this.txtHeader.Name = "txtHeader";
+            this.txtHeader.Size = new System.Drawing.Size(535, 20);
+            this.txtHeader.TabIndex = 2;
             // 
             // btnAddTable
             // 
@@ -89,59 +132,16 @@
             this.btnRemoveGroup.UseVisualStyleBackColor = true;
             this.btnRemoveGroup.Click += new System.EventHandler(this.btnRemoveGroup_Click);
             // 
-            // txtHeader
-            // 
-            this.txtHeader.Location = new System.Drawing.Point(151, 3);
-            this.txtHeader.Name = "txtHeader";
-            this.txtHeader.Size = new System.Drawing.Size(535, 20);
-            this.txtHeader.TabIndex = 2;
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(151, 29);
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(535, 44);
-            this.txtDescription.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Header Name";
-            // 
-            // Description
-            // 
-            this.Description.AutoSize = true;
-            this.Description.Location = new System.Drawing.Point(3, 32);
-            this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(73, 13);
-            this.Description.TabIndex = 5;
-            this.Description.Text = "Header Name";
-            // 
-            // ucColumnSettings1
-            // 
-            this.ucColumnSettings1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ucColumnSettings1.Location = new System.Drawing.Point(3, 10);
-            this.ucColumnSettings1.Name = "ucColumnSettings1";
-            this.ucColumnSettings1.Size = new System.Drawing.Size(778, 26);
-            this.ucColumnSettings1.TabIndex = 0;
-            this.ucColumnSettings1.OnColumnDeleted += new GenerarePDF.ucColumnSettings.ColumnDeleted(this.Column_OnColumnDeleted);
-            this.ucColumnSettings1.OnColumnAdded += new GenerarePDF.ucColumnSettings.ColumnAdded(this.Column_OnColumnAdded);
-            // 
             // ucTableSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
+            this.AutoScroll = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.grpName);
             this.Controls.Add(this.pnlTop);
             this.Name = "ucTableSettings";
-            this.Size = new System.Drawing.Size(784, 126);
+            this.Size = new System.Drawing.Size(784, 300);
             this.grpName.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();

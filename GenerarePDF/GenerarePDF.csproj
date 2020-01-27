@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PDFTechLib">
       <HintPath>.\PDFTechLib.dll</HintPath>
     </Reference>
@@ -49,43 +52,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmMainForm.cs">
+    <Compile Include="Forms\frmMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainForm.Designer.cs">
+    <Compile Include="Forms\frmMainForm.Designer.cs">
       <DependentUpon>frmMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSettingsForm.cs">
+    <Compile Include="Forms\frmSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSettingsForm.Designer.cs">
+    <Compile Include="Forms\frmSettingsForm.Designer.cs">
       <DependentUpon>frmSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableSettings.cs" />
-    <Compile Include="ucColumnSettings.cs">
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="UserControls\ucColumnSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucColumnSettings.Designer.cs">
+    <Compile Include="UserControls\ucColumnSettings.Designer.cs">
       <DependentUpon>ucColumnSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucRowTable1.cs">
+    <Compile Include="UserControls\ucRowTable1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucRowTable1.Designer.cs">
+    <Compile Include="UserControls\ucRowTable1.Designer.cs">
       <DependentUpon>ucRowTable1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucTableSettings.cs">
+    <Compile Include="UserControls\ucTableSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucTableSettings.Designer.cs">
+    <Compile Include="UserControls\ucTableSettings.Designer.cs">
       <DependentUpon>ucTableSettings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmMainForm.resx">
+    <EmbeddedResource Include="Forms\frmMainForm.resx">
       <DependentUpon>frmMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSettingsForm.resx">
+    <EmbeddedResource Include="Forms\frmSettingsForm.resx">
       <DependentUpon>frmSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -97,15 +100,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ucColumnSettings.resx">
+    <EmbeddedResource Include="UserControls\ucColumnSettings.resx">
       <DependentUpon>ucColumnSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucRowTable1.resx">
+    <EmbeddedResource Include="UserControls\ucRowTable1.resx">
       <DependentUpon>ucRowTable1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucTableSettings.resx">
+    <EmbeddedResource Include="UserControls\ucTableSettings.resx">
       <DependentUpon>ucTableSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

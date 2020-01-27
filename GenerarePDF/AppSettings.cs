@@ -8,7 +8,7 @@ namespace GenerarePDF
 {
     public class AppSettings
     {
-        List<TableSettings> Tables { get; set; }
+        public List<TableSettings> Tables { get; set; }
 
         public AppSettings()
         {
@@ -20,7 +20,7 @@ namespace GenerarePDF
     {
         public string Header { get; set; }
         public string Description { get; set; }
-        List<ColumnSettings> Columns { get; set; }
+        public List<ColumnSettings> Columns { get; set; }
 
         public TableSettings()
         {
@@ -32,5 +32,11 @@ namespace GenerarePDF
     {
         private string Name { get; set; }
         private float Percentage { get; set; }
+
+        public ColumnSettings(string name, float percentage)
+        {
+            Name = name;
+            Percentage = percentage;
+        }
     }
 }

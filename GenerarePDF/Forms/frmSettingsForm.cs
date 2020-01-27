@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +48,27 @@ namespace GenerarePDF
             try
             {
                 AddTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AppSettings settings = new AppSettings();
+                foreach (var control in pnlContent.Controls)
+                {
+                    if (control is ucTableSettings)
+                    {
+                        settings.Tables.Add((control as ucTableSettings).GetTable());
+                    }
+                }
+                string stringSettings = JsonConvert.SerializeObject(settings);
+                File.WriteAllText("appsettings.txt", stringSettings);
             }
             catch (Exception ex)
             {

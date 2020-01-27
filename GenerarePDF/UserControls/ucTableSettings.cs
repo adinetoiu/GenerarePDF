@@ -12,6 +12,21 @@ namespace GenerarePDF
 {
     public partial class ucTableSettings : UserControl
     {
+        public TableSettings GetTable()
+        {
+            TableSettings tableSettings = new TableSettings();
+            tableSettings.Header = txtHeader.Text;
+            tableSettings.Description = txtDescription.Text;
+            foreach (var control in grpName.Controls)
+            {
+                if (control is ucColumnSettings)
+                {
+                    tableSettings.Columns.Add((control as ucColumnSettings).GetColumnSettings());
+                }
+            }
+            return tableSettings;
+        }
+
         public delegate void TableDeleted(ucTableSettings item);
         public event TableDeleted OnTableDeleted;
 

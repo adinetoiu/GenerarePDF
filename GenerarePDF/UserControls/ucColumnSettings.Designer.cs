@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtPercentage = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddColumn = new System.Windows.Forms.Button();
             this.btnDeleteColumn = new System.Windows.Forms.Button();
@@ -55,19 +55,19 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Width Percentage";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(102, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(178, 20);
-            this.textBox1.TabIndex = 2;
+            this.txtName.Location = new System.Drawing.Point(102, 3);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(178, 20);
+            this.txtName.TabIndex = 2;
             // 
-            // textBox2
+            // txtPercentage
             // 
-            this.textBox2.Location = new System.Drawing.Point(509, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(55, 20);
-            this.textBox2.TabIndex = 3;
+            this.txtPercentage.Location = new System.Drawing.Point(509, 3);
+            this.txtPercentage.Name = "txtPercentage";
+            this.txtPercentage.Size = new System.Drawing.Size(55, 20);
+            this.txtPercentage.TabIndex = 3;
             // 
             // label3
             // 
@@ -107,8 +107,8 @@
             this.Controls.Add(this.btnAddColumn);
             this.Controls.Add(this.btnDeleteColumn);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtPercentage);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucColumnSettings";
@@ -122,8 +122,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtPercentage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAddColumn;
         private System.Windows.Forms.Button btnDeleteColumn;

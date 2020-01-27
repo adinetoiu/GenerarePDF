@@ -38,5 +38,11 @@ namespace GenerarePDF
                 OnColumnDeleted(this);
             }
         }
+
+        public ColumnSettings GetColumnSettings()
+        {
+            return new ColumnSettings(txtName.Text, float.Parse(txtPercentage.Text));
+        }
+
     }
 }
