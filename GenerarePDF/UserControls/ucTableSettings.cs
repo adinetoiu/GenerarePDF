@@ -16,7 +16,6 @@ namespace GenerarePDF
         {
             TableSettings tableSettings = new TableSettings();
             tableSettings.Header = txtHeader.Text;
-            tableSettings.Description = txtDescription.Text;
             foreach (var control in grpName.Controls)
             {
                 if (control is ucColumnSettings)
@@ -25,6 +24,22 @@ namespace GenerarePDF
                 }
             }
             return tableSettings;
+        }
+
+        internal void Init(TableSettings tableSett)
+        {
+            if (tableSett != null)
+            {
+                txtHeader.Text = tableSett.Header;
+                foreach (var col in tableSett.Columns)
+                {
+                    AddColumn(col);
+                }
+            }
+            else
+            {
+                AddColumn(null);
+            }
         }
 
         public delegate void TableDeleted(ucTableSettings item);
@@ -54,7 +69,7 @@ namespace GenerarePDF
         {
             try
             {
-                AddColumn();
+                AddColumn(null);
             }
             catch (Exception ex)
             {
@@ -62,14 +77,20 @@ namespace GenerarePDF
             }
         }
 
-        private void AddColumn()
+        private void AddColumn(ColumnSettings colSett)
         {
             ucColumnSettings column = new ucColumnSettings();
             column.OnColumnAdded += Column_OnColumnAdded;
             column.OnColumnDeleted += Column_OnColumnDeleted;
             grpName.Controls.Add(column);
-            column.Dock = DockStyle.Bottom;
+            column.Dock = DockStyle.Top;
+            column.BringToFront();
             grpName.Height += column.Height;
+
+            if (colSett != null)
+            {
+                column.init(colSett);
+            }
 
             if (OnColumnSizeChanged != null)
             {

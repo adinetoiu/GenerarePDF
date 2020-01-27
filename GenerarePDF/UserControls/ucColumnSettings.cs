@@ -44,5 +44,10 @@ namespace GenerarePDF
             return new ColumnSettings(txtName.Text, float.Parse(txtPercentage.Text));
         }
 
+        internal void init(ColumnSettings colSett)
+        {
+            txtName.Text = colSett.Name;
+            txtPercentage.Text = colSett.Percentage.ToString();
+        }
     }
 }

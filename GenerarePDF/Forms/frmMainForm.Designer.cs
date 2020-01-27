@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlBotton = new System.Windows.Forms.Panel();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.pnlBotton.SuspendLayout();
             this.SuspendLayout();
@@ -105,6 +106,7 @@
             // 
             // pnlBotton
             // 
+            this.pnlBotton.Controls.Add(this.btnSettings);
             this.pnlBotton.Controls.Add(this.btnPrint);
             this.pnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBotton.Location = new System.Drawing.Point(0, 469);
@@ -123,7 +125,17 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // Form1
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(12, 18);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnSettings.TabIndex = 1;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,8 +143,10 @@
             this.ClientSize = new System.Drawing.Size(928, 522);
             this.Controls.Add(this.pnlBotton);
             this.Controls.Add(this.panelMain);
-            this.Name = "Form1";
+            this.Name = "frmMainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             this.pnlBotton.ResumeLayout(false);
@@ -150,6 +164,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlBotton;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 

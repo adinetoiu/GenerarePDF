@@ -19,15 +19,16 @@ namespace GenerarePDF
             InitializeComponent();
         }
 
-        private void AddTable()
+        private void AddTable(TableSettings tableSett)
         {
             ucTableSettings table = new ucTableSettings();
-            table.OnTableAdded += Table_OnTableAdded; ;
             table.OnTableDeleted += Table_OnTableDeleted;
             table.OnColumnSizeChanged += Table_OnColumnSizeChanged;
             pnlContent.Controls.Add(table);
-            table.Dock = DockStyle.Bottom;
+            table.Dock = DockStyle.Top;
+            table.BringToFront();
             pnlContent.Height += table.Height;
+            table.Init(tableSett);
         }
 
         private void Table_OnColumnSizeChanged(int size)
@@ -43,17 +44,6 @@ namespace GenerarePDF
             }
         }
 
-        private void Table_OnTableAdded(ucTableSettings item)
-        {
-            try
-            {
-                AddTable();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -69,11 +59,25 @@ namespace GenerarePDF
                 }
                 string stringSettings = JsonConvert.SerializeObject(settings);
                 File.WriteAllText("appsettings.txt", stringSettings);
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        internal void Init(AppSettings settings)
+        {
+            foreach (var sett in settings.Tables)
+            {
+                AddTable(sett);
+            }
+        }
+
+        private void btnAddTable_Click(object sender, EventArgs e)
+        {
+            AddTable(null);
         }
     }
 }

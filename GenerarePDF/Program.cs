@@ -16,7 +16,7 @@ namespace GenerarePDF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmSettingsForm());
+            Application.Run(new frmMainForm());
         }
     }
 }

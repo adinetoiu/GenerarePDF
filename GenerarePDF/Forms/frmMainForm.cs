@@ -1,4 +1,5 @@
-﻿using PDFTech;
+﻿using Newtonsoft.Json;
+using PDFTech;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,17 @@ namespace GenerarePDF
 {
     public partial class frmMainForm : Form
     {
+        public AppSettings _settings;
+
         public frmMainForm()
         {
             try
             {
                 PDFDocument.License = "UOEIOBIR-2051-191-P0050";
                 InitializeComponent();
+                _settings = new AppSettings();
+                string stringSettings = File.ReadAllText("appsettings.txt");
+                _settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
                 AddRow();
             }
             catch (Exception ex)
@@ -125,5 +131,18 @@ namespace GenerarePDF
             }
         }
 
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSettingsForm form = new frmSettingsForm();
+                form.Init(_settings);
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
