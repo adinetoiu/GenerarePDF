@@ -38,7 +38,7 @@ namespace GenerarePDF
 
         private void Table_OnTableDeleted(ucTableSettings item)
         {
-            if (MessageBox.Show("Are you sure you want to delete table?") == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete table?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 pnlContent.Controls.Remove(item);
             }

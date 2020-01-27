@@ -37,6 +37,7 @@
             // 
             // pnlBotton
             // 
+            this.pnlBotton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlBotton.Controls.Add(this.btnAddTable);
             this.pnlBotton.Controls.Add(this.btnSave);
             this.pnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -48,7 +49,7 @@
             // btnAddTable
             // 
             this.btnAddTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTable.Location = new System.Drawing.Point(608, 14);
+            this.btnAddTable.Location = new System.Drawing.Point(606, 12);
             this.btnAddTable.Name = "btnAddTable";
             this.btnAddTable.Size = new System.Drawing.Size(75, 23);
             this.btnAddTable.TabIndex = 1;
@@ -59,7 +60,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(702, 14);
+            this.btnSave.Location = new System.Drawing.Point(700, 12);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
