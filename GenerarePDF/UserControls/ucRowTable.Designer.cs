@@ -36,10 +36,10 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Location = new System.Drawing.Point(1168, 1);
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnDelete.Location = new System.Drawing.Point(1172, 0);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(20, 20);
+            this.btnDelete.Size = new System.Drawing.Size(20, 29);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "x";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -47,12 +47,12 @@
             // 
             // pnlContainer
             // 
-            this.pnlContainer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlContainer.BackColor = System.Drawing.Color.Transparent;
             this.pnlContainer.Controls.Add(this.tlpColumns);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(1192, 29);
+            this.pnlContainer.Size = new System.Drawing.Size(1172, 29);
             this.pnlContainer.TabIndex = 7;
             // 
             // tlpColumns
@@ -69,7 +69,7 @@
             this.tlpColumns.Name = "tlpColumns";
             this.tlpColumns.RowCount = 1;
             this.tlpColumns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpColumns.Size = new System.Drawing.Size(1192, 29);
+            this.tlpColumns.Size = new System.Drawing.Size(1172, 29);
             this.tlpColumns.TabIndex = 1;
             // 
             // ucRowTable

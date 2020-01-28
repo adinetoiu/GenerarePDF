@@ -48,6 +48,7 @@ namespace GenerarePDF
                 tlpColumns.Controls.Add(textbox);
                 tlpColumns.SetColumn(textbox, i);
                 tlpColumns.SetRow(textbox, 0);
+                textbox.Dock = DockStyle.Fill;
             }
         }
 
