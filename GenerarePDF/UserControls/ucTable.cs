@@ -14,6 +14,31 @@ namespace GenerarePDF.UserControls
     {
         TableSettings _table;
 
+        public string GetHeader()
+        {
+            return txtHeader.Text;
+        }
+
+        public List<ColumnSettings> GetColumns()
+        {
+            return _table.Columns;
+        }
+
+        public List<List<string>> GetRowsValues()
+        {
+            List<List<string>> rows = new List<List<string>>();
+            for (int j = pnlContainer.Controls.Count - 1; j >= 0; j--)
+            {
+                var control = pnlContainer.Controls[j];
+
+                if (control is ucRowTable)
+                {
+                    rows.Add((control as ucRowTable).GetRowValues());
+                }
+            }
+            return rows;
+        }
+
         public ucTable()
         {
             InitializeComponent();

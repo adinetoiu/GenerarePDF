@@ -32,7 +32,9 @@
             this.pnlBotton = new System.Windows.Forms.Panel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlBotton.SuspendLayout();
+            this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -75,19 +77,30 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // pnlContainer
+            // 
+            this.pnlContainer.AutoScroll = true;
+            this.pnlContainer.Controls.Add(this.panelMain);
+            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer.Location = new System.Drawing.Point(0, 0);
+            this.pnlContainer.Name = "pnlContainer";
+            this.pnlContainer.Size = new System.Drawing.Size(928, 469);
+            this.pnlContainer.TabIndex = 2;
+            // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(928, 522);
+            this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlBotton);
-            this.Controls.Add(this.panelMain);
             this.Name = "frmMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlBotton.ResumeLayout(false);
+            this.pnlContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -98,6 +111,7 @@
         private System.Windows.Forms.Panel pnlBotton;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Panel pnlContainer;
     }
 }
 

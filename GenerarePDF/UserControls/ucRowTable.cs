@@ -15,6 +15,22 @@ namespace GenerarePDF
         public delegate void RowDeleted(ucRowTable item);
         public event RowDeleted OnRowDeleted;
 
+        public List<string> GetRowValues()
+        {
+            List<string> rowValues = new List<string>();
+
+            for (int j = 0; j <= tlpColumns.Controls.Count - 1; j++)
+            {
+                var ctrl = tlpColumns.Controls[j];
+                if (ctrl is TextBox)
+                {
+                    rowValues.Add((ctrl as TextBox).Text);
+                }
+            }
+            return rowValues;
+        }
+
+
         public ucRowTable()
         {
             InitializeComponent();
@@ -35,23 +51,6 @@ namespace GenerarePDF
             }
         }
 
-        public string GetValue(int index)
-        {
-            int i = 0;
-            for (int j = this.Controls.Count - 1; j >= 0; j--)
-            {
-                var ctrl = Controls[j];
-                if (ctrl is TextBox)
-                {
-                    i++;
-                    if (i == index)
-                    {
-                        return ctrl.Text;
-                    }
-                }
-            }
-            return string.Empty;
-        }
 
 
 

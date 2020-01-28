@@ -28,7 +28,7 @@ namespace GenerarePDF
                 _settings = new AppSettings();
                 string stringSettings = File.ReadAllText("appsettings.txt");
                 _settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
-                foreach(var table in _settings.Tables)
+                foreach (var table in _settings.Tables)
                 {
                     AddTable(table);
                 }
@@ -93,38 +93,49 @@ namespace GenerarePDF
                         document.Pages.Delete(document.CurrentPage);
                         document.LoadPdf(ms, "");
 
-                        int i = 0;
-
-                        Table table = new Table(5);
-                        table.width = 800;
-                        table.DisplayHeader = true;
-                        table.headerStyle.fontStyle = TableFontStyle.bold;
-                        table.headerStyle.fontSize = 9;
-                        table.headerStyle.fontName = "Arial";
-                        table.headerStyle.backgroundColor = Color.LightGray;
-
-                        foreach (var ctrl in panelMain.Controls)
+                        double lastWidth = 500f;
+                        double tableWidth = 0;
+                        for (int j = panelMain.Controls.Count - 1; j >= 0; j--)
                         {
-                            ucRowTable control = ctrl as ucRowTable;
-                            if (control != null)
+                            var control = panelMain.Controls[j];
+                            if (control is ucTable)
                             {
-                                table.addRow();
-                                for (int column = 0; column < 5; column++)
-                                {
-                                    if (i == 0)
-                                    {
-                                        //string headerColumnName = control.GetHeaderName(column + 1);
-                                        //table.column(column).width = control.GetColumnWidth(column + 1); ;
-                                        //table.column(column).header.SetValue(headerColumnName);
-                                    }
+                                string header = (control as ucTable).GetHeader();
+                                List<ColumnSettings> columns = (control as ucTable).GetColumns();
+                                List<List<string>> rows = (control as ucTable).GetRowsValues();
 
-                                    var cel = table.cell(i, column);
-                                    cel.SetValue(control.GetValue(column + 1));
+                                document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
+                                document.Pages[0].Body.AddTextArea(new RectangleF(-60, (int)lastWidth - 20, 700, 20), header, false);
+
+                                Table table = new Table(columns.Count);
+                                table.width = 700;
+                                table.DisplayHeader = true;
+                                table.headerStyle.fontStyle = TableFontStyle.bold;
+                                table.headerStyle.fontSize = 8.5;
+                                table.headerStyle.fontName = "Tahoma";
+                                table.headerStyle.fontStyle = TableFontStyle.bold;
+                                table.headerStyle.backgroundColor = Color.LightGray;
+
+                                for (int row = 0; row < rows.Count; row++)
+                                {
+                                    table.addRow();
+                                    for (int column = 0; column < columns.Count; column++)
+                                    {
+                                        if (row == 0)
+                                        {
+                                            table.column(column).width = table.width * (double)columns[column].Percentage / 100;
+                                            table.column(column).header.SetValue(columns[column].Name);
+                                        }
+
+                                        var cel = table.cell(row, column);
+                                        cel.SetValue(rows[row][column]);
+                                    }
+                                    tableWidth += 30;
                                 }
-                                i++;
+                                document.Pages[0].Body.DrawTable(table, -60, lastWidth);
+                                lastWidth += tableWidth + 50;
                             }
                         }
-                        document.Pages[0].Body.DrawTable(table, -60, 500);
                         document.Save();
                         pdfOutput = outputMs.ToArray();
                     }
