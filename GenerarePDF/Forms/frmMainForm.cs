@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GenerarePDF.UserControls;
+using Newtonsoft.Json;
 using PDFTech;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,11 @@ namespace GenerarePDF
                 _settings = new AppSettings();
                 string stringSettings = File.ReadAllText("appsettings.txt");
                 _settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
-                AddRow();
+                foreach(var table in _settings.Tables)
+                {
+                    AddTable(table);
+                }
+
             }
             catch (Exception ex)
             {
@@ -35,21 +40,23 @@ namespace GenerarePDF
             }
         }
 
-        private void AddRow()
+        private void AddTable(TableSettings table)
         {
-            ucRowTable1 ucControl = new ucRowTable1();
-            ucControl.OnRowDeleted += UcControl_OnRowDeleted;
-            ucControl.OnRowAdded += UcControl_OnRowAdded;
+            ucTable ucControl = new ucTable();
+            //ucControl.OnRowDeleted += UcControl_OnRowDeleted;
+            //ucControl.OnRowAdded += UcControl_OnRowAdded;
             panelMain.Controls.Add(ucControl);
-            ucControl.Dock = DockStyle.Bottom;
+            ucControl.Dock = DockStyle.Top;
+            ucControl.BringToFront();
             panelMain.Height += ucControl.Height;
+            ucControl.Init(table);
         }
 
-        private void UcControl_OnRowAdded(ucRowTable1 item)
+        private void UcControl_OnRowAdded(ucRowTable item)
         {
             try
             {
-                AddRow();
+                AddTable(null);
             }
             catch (Exception ex)
             {
@@ -57,7 +64,7 @@ namespace GenerarePDF
             }
         }
 
-        private void UcControl_OnRowDeleted(ucRowTable1 item)
+        private void UcControl_OnRowDeleted(ucRowTable item)
         {
             try
             {
@@ -98,7 +105,7 @@ namespace GenerarePDF
 
                         foreach (var ctrl in panelMain.Controls)
                         {
-                            ucRowTable1 control = ctrl as ucRowTable1;
+                            ucRowTable control = ctrl as ucRowTable;
                             if (control != null)
                             {
                                 table.addRow();
@@ -106,9 +113,9 @@ namespace GenerarePDF
                                 {
                                     if (i == 0)
                                     {
-                                        string headerColumnName = control.GetHeaderName(column + 1);
-                                        table.column(column).width = control.GetColumnWidth(column + 1); ;
-                                        table.column(column).header.SetValue(headerColumnName);
+                                        //string headerColumnName = control.GetHeaderName(column + 1);
+                                        //table.column(column).width = control.GetColumnWidth(column + 1); ;
+                                        //table.column(column).header.SetValue(headerColumnName);
                                     }
 
                                     var cel = table.cell(i, column);

@@ -73,11 +73,17 @@
     <Compile Include="UserControls\ucColumnSettings.Designer.cs">
       <DependentUpon>ucColumnSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucRowTable1.cs">
+    <Compile Include="UserControls\ucRowTable.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ucRowTable1.Designer.cs">
-      <DependentUpon>ucRowTable1.cs</DependentUpon>
+    <Compile Include="UserControls\ucRowTable.Designer.cs">
+      <DependentUpon>ucRowTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucTable.Designer.cs">
+      <DependentUpon>ucTable.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucTableSettings.cs">
       <SubType>UserControl</SubType>
@@ -103,8 +109,11 @@
     <EmbeddedResource Include="UserControls\ucColumnSettings.resx">
       <DependentUpon>ucColumnSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ucRowTable1.resx">
-      <DependentUpon>ucRowTable1.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ucRowTable.resx">
+      <DependentUpon>ucRowTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucTable.resx">
+      <DependentUpon>ucTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucTableSettings.resx">
       <DependentUpon>ucTableSettings.cs</DependentUpon>
