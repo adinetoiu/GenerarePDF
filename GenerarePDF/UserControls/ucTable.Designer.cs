@@ -31,9 +31,9 @@
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddRow = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlContainer = new System.Windows.Forms.Panel();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.txtHeader = new System.Windows.Forms.TextBox();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.pnlContainer = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,14 +73,12 @@
             this.panel1.Size = new System.Drawing.Size(1051, 41);
             this.panel1.TabIndex = 2;
             // 
-            // pnlContainer
+            // txtHeader
             // 
-            this.pnlContainer.BackColor = System.Drawing.Color.Transparent;
-            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContainer.Location = new System.Drawing.Point(0, 75);
-            this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(1051, 291);
-            this.pnlContainer.TabIndex = 3;
+            this.txtHeader.Location = new System.Drawing.Point(77, 16);
+            this.txtHeader.Name = "txtHeader";
+            this.txtHeader.Size = new System.Drawing.Size(626, 20);
+            this.txtHeader.TabIndex = 3;
             // 
             // lblHeader
             // 
@@ -91,12 +89,15 @@
             this.lblHeader.TabIndex = 2;
             this.lblHeader.Text = "Header:";
             // 
-            // txtHeader
+            // pnlContainer
             // 
-            this.txtHeader.Location = new System.Drawing.Point(77, 16);
-            this.txtHeader.Name = "txtHeader";
-            this.txtHeader.Size = new System.Drawing.Size(626, 20);
-            this.txtHeader.TabIndex = 3;
+            this.pnlContainer.AutoScroll = true;
+            this.pnlContainer.BackColor = System.Drawing.Color.Transparent;
+            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlContainer.Location = new System.Drawing.Point(0, 75);
+            this.pnlContainer.Name = "pnlContainer";
+            this.pnlContainer.Size = new System.Drawing.Size(1051, 291);
+            this.pnlContainer.TabIndex = 3;
             // 
             // ucTable
             // 
@@ -107,7 +108,7 @@
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.panel1);
             this.Name = "ucTable";
-            this.Size = new System.Drawing.Size(1051, 535);
+            this.Size = new System.Drawing.Size(1051, 375);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
