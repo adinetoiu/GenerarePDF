@@ -50,8 +50,9 @@ namespace GenerarePDF
             try
             {
                 AppSettings settings = new AppSettings();
-                foreach (var control in pnlContent.Controls)
+                for (int i = pnlContent.Controls.Count - 1; i >= 0; i--)
                 {
+                    var control = pnlContent.Controls[i];
                     if (control is ucTableSettings)
                     {
                         settings.Tables.Add((control as ucTableSettings).GetTable());
