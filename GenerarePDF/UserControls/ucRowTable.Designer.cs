@@ -30,7 +30,7 @@
         {
             this.btnDelete = new System.Windows.Forms.Button();
             this.pnlContainer = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpColumns = new System.Windows.Forms.TableLayoutPanel();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,29 +47,30 @@
             // 
             // pnlContainer
             // 
-            this.pnlContainer.Controls.Add(this.tableLayoutPanel);
-            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlContainer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlContainer.Controls.Add(this.tlpColumns);
+            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(1192, 229);
+            this.pnlContainer.Size = new System.Drawing.Size(1192, 29);
             this.pnlContainer.TabIndex = 7;
             // 
-            // tableLayoutPanel
+            // tlpColumns
             // 
-            this.tableLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel.ColumnCount = 5;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 1;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1192, 26);
-            this.tableLayoutPanel.TabIndex = 1;
+            this.tlpColumns.BackColor = System.Drawing.Color.White;
+            this.tlpColumns.ColumnCount = 5;
+            this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tlpColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpColumns.Location = new System.Drawing.Point(0, 0);
+            this.tlpColumns.Name = "tlpColumns";
+            this.tlpColumns.RowCount = 1;
+            this.tlpColumns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpColumns.Size = new System.Drawing.Size(1192, 29);
+            this.tlpColumns.TabIndex = 1;
             // 
             // ucRowTable
             // 
@@ -78,7 +79,7 @@
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.btnDelete);
             this.Name = "ucRowTable";
-            this.Size = new System.Drawing.Size(1192, 348);
+            this.Size = new System.Drawing.Size(1192, 29);
             this.pnlContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -87,6 +88,6 @@
         #endregion
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel pnlContainer;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.TableLayoutPanel tlpColumns;
     }
 }

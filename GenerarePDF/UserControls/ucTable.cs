@@ -22,6 +22,7 @@ namespace GenerarePDF.UserControls
         public void Init(TableSettings table)
         {
             _table = table;
+            txtHeader.Text = table.Header;
             tableLayoutPanel.ColumnStyles.Clear();
             tableLayoutPanel.ColumnCount = table.Columns.Count;
             for (int i = 0; i < table.Columns.Count; i++)

@@ -22,16 +22,16 @@ namespace GenerarePDF
 
         internal void Init(TableSettings table)
         {
-            tableLayoutPanel.ColumnStyles.Clear();
-            tableLayoutPanel.RowStyles.Clear();
+            tlpColumns.ColumnStyles.Clear();
+            tlpColumns.RowStyles.Clear();
             for (int i = 0; i < table.Columns.Count; i++)
             {
-                this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, table.Columns[i].Percentage));
-                tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, table.Columns[i].Percentage));
+                tlpColumns.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
                 TextBox textbox = new TextBox();
-                tableLayoutPanel.Controls.Add(textbox);
-                tableLayoutPanel.SetColumn(textbox, i);
-                tableLayoutPanel.SetRow(textbox, 0);
+                tlpColumns.Controls.Add(textbox);
+                tlpColumns.SetColumn(textbox, i);
+                tlpColumns.SetRow(textbox, 0);
             }
         }
 

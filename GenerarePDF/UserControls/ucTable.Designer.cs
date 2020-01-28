@@ -32,6 +32,8 @@
             this.btnAddRow = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlContainer = new System.Windows.Forms.Panel();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.txtHeader = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +64,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtHeader);
+            this.panel1.Controls.Add(this.lblHeader);
             this.panel1.Controls.Add(this.btnAddRow);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -78,6 +82,22 @@
             this.pnlContainer.Size = new System.Drawing.Size(1051, 291);
             this.pnlContainer.TabIndex = 3;
             // 
+            // lblHeader
+            // 
+            this.lblHeader.AutoSize = true;
+            this.lblHeader.Location = new System.Drawing.Point(13, 19);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(45, 13);
+            this.lblHeader.TabIndex = 2;
+            this.lblHeader.Text = "Header:";
+            // 
+            // txtHeader
+            // 
+            this.txtHeader.Location = new System.Drawing.Point(77, 16);
+            this.txtHeader.Name = "txtHeader";
+            this.txtHeader.Size = new System.Drawing.Size(626, 20);
+            this.txtHeader.TabIndex = 3;
+            // 
             // ucTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,6 +109,7 @@
             this.Name = "ucTable";
             this.Size = new System.Drawing.Size(1051, 535);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -99,5 +120,7 @@
         private System.Windows.Forms.Button btnAddRow;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlContainer;
+        private System.Windows.Forms.TextBox txtHeader;
+        private System.Windows.Forms.Label lblHeader;
     }
 }
