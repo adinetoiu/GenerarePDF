@@ -33,6 +33,8 @@
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.pnlContainer = new System.Windows.Forms.Panel();
+            this.txtCurrentDate = new System.Windows.Forms.TextBox();
+            this.lblDate = new System.Windows.Forms.Label();
             this.pnlBotton.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +50,8 @@
             // 
             // pnlBotton
             // 
+            this.pnlBotton.Controls.Add(this.lblDate);
+            this.pnlBotton.Controls.Add(this.txtCurrentDate);
             this.pnlBotton.Controls.Add(this.btnSettings);
             this.pnlBotton.Controls.Add(this.btnPrint);
             this.pnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -87,6 +91,24 @@
             this.pnlContainer.Size = new System.Drawing.Size(928, 469);
             this.pnlContainer.TabIndex = 2;
             // 
+            // txtCurrentDate
+            // 
+            this.txtCurrentDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCurrentDate.Location = new System.Drawing.Point(674, 20);
+            this.txtCurrentDate.Name = "txtCurrentDate";
+            this.txtCurrentDate.Size = new System.Drawing.Size(141, 20);
+            this.txtCurrentDate.TabIndex = 2;
+            // 
+            // lblDate
+            // 
+            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(625, 23);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 3;
+            this.lblDate.Text = "Data";
+            // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,6 +122,7 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlBotton.ResumeLayout(false);
+            this.pnlBotton.PerformLayout();
             this.pnlContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -112,6 +135,8 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Panel pnlContainer;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.TextBox txtCurrentDate;
     }
 }
 

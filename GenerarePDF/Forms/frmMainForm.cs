@@ -33,6 +33,7 @@ namespace GenerarePDF
                     AddTable(table);
                 }
 
+                txtCurrentDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
             }
             catch (Exception ex)
             {
@@ -92,6 +93,11 @@ namespace GenerarePDF
                         var document = new PDFDocument(outputMs, options);
                         document.Pages.Delete(document.CurrentPage);
                         document.LoadPdf(ms, "");
+
+
+                        document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
+                        document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 14);
+                        document.Pages[0].Body.AddTextArea(new RectangleF(415, 50, 100, 20), txtCurrentDate.Text, true);
 
                         double lastHeigth = 500f;
                         double tableHeight = 0;

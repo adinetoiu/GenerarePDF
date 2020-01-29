@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GenerarePDF.Forms;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace GenerarePDF
 {
     public partial class frmSettingsForm : Form
     {
+        AppSettings _settings;
         public frmSettingsForm()
         {
             InitializeComponent();
@@ -49,16 +51,16 @@ namespace GenerarePDF
         {
             try
             {
-                AppSettings settings = new AppSettings();
+                _settings.Tables.Clear();
                 for (int i = pnlContent.Controls.Count - 1; i >= 0; i--)
                 {
                     var control = pnlContent.Controls[i];
                     if (control is ucTableSettings)
                     {
-                        settings.Tables.Add((control as ucTableSettings).GetTable());
+                        _settings.Tables.Add((control as ucTableSettings).GetTable());
                     }
                 }
-                string stringSettings = JsonConvert.SerializeObject(settings);
+                string stringSettings = JsonConvert.SerializeObject(_settings);
                 File.WriteAllText("appsettings.txt", stringSettings);
                 this.Close();
             }
@@ -70,6 +72,10 @@ namespace GenerarePDF
 
         internal void Init(AppSettings settings)
         {
+            _settings = settings;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = _settings.Drivers;
+
             foreach (var sett in settings.Tables)
             {
                 AddTable(sett);
@@ -79,6 +85,28 @@ namespace GenerarePDF
         private void btnAddTable_Click(object sender, EventArgs e)
         {
             AddTable(null);
+        }
+
+        private void btnDriver_Click(object sender, EventArgs e)
+        {
+            frmAddEditDriver form = new frmAddEditDriver();
+            form.Init(null);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(form.Driver.ID))
+                {
+                    form.Driver.ID = Guid.NewGuid().ToString();
+                    _settings.Drivers.Add(form.Driver);
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = _settings.Drivers;
+                }
+                else
+                {
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = _settings.Drivers;
+                }
+
+            }
         }
     }
 }

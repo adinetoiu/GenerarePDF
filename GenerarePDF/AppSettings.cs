@@ -9,10 +9,12 @@ namespace GenerarePDF
     public class AppSettings
     {
         public List<TableSettings> Tables { get; set; }
+        public List<Driver> Drivers { get; set; }
 
         public AppSettings()
         {
             Tables = new List<TableSettings>();
+            Drivers = new List<Driver>();
         }
     }
 
@@ -36,6 +38,24 @@ namespace GenerarePDF
         {
             Name = name;
             Percentage = percentage;
+        }
+    }
+
+    public class Driver
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+
+        public Driver(string name, string address)
+        {
+            Name = name;
+            Address = address;
+        }
+
+        public Driver()
+        {
+
         }
     }
 }

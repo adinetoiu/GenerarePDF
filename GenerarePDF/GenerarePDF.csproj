@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\frmAddEditDriver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAddEditDriver.Designer.cs">
+      <DependentUpon>frmAddEditDriver.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="UserControls\ucTableSettings.Designer.cs">
       <DependentUpon>ucTableSettings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\frmAddEditDriver.resx">
+      <DependentUpon>frmAddEditDriver.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMainForm.resx">
       <DependentUpon>frmMainForm.cs</DependentUpon>
     </EmbeddedResource>
