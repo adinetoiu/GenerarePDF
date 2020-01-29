@@ -16,8 +16,9 @@ namespace GenerarePDF
         {
             TableSettings tableSettings = new TableSettings();
             tableSettings.Header = txtHeader.Text;
-            foreach (var control in grpName.Controls)
+            for (int i = grpName.Controls.Count - 1; i >= 0; i--)
             {
+                var control = grpName.Controls[i];
                 if (control is ucColumnSettings)
                 {
                     tableSettings.Columns.Add((control as ucColumnSettings).GetColumnSettings());

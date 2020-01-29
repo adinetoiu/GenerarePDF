@@ -93,8 +93,8 @@ namespace GenerarePDF
                         document.Pages.Delete(document.CurrentPage);
                         document.LoadPdf(ms, "");
 
-                        double lastWidth = 500f;
-                        double tableWidth = 0;
+                        double lastHeigth = 500f;
+                        double tableHeight = 0;
                         for (int j = panelMain.Controls.Count - 1; j >= 0; j--)
                         {
                             var control = panelMain.Controls[j];
@@ -104,8 +104,10 @@ namespace GenerarePDF
                                 List<ColumnSettings> columns = (control as ucTable).GetColumns();
                                 List<List<string>> rows = (control as ucTable).GetRowsValues();
 
+                                document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
                                 document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
-                                document.Pages[0].Body.AddTextArea(new RectangleF(-60, (int)lastWidth - 20, 700, 20), header, false);
+                                document.Pages[0].Body.AddTextArea(new RectangleF(-60, (int)lastHeigth - 20, 700, 20), header, true);
+
 
                                 Table table = new Table(columns.Count);
                                 table.width = 700;
@@ -125,23 +127,32 @@ namespace GenerarePDF
                                         {
                                             table.column(column).width = table.width * (double)columns[column].Percentage / 100;
                                             table.column(column).header.SetValue(columns[column].Name);
+                                            table.column(column).header.style.textAlign = TextAlignment.center;
                                         }
 
                                         var cel = table.cell(row, column);
                                         cel.SetValue(rows[row][column]);
+                                        cel.style.textAlign = TextAlignment.center;
                                     }
-                                    tableWidth += 30;
+                                    tableHeight += 30;
                                 }
-                                document.Pages[0].Body.DrawTable(table, -60, lastWidth);
-                                lastWidth += tableWidth + 50;
+                                document.Pages[0].Body.DrawTable(table, -60, lastHeigth);
                             }
+                            lastHeigth += tableHeight + 100;
                         }
                         document.Save();
                         pdfOutput = outputMs.ToArray();
                     }
                 }
-                File.WriteAllBytes("out.pdf", pdfOutput);
-                Process.Start("out.pdf");
+                try
+                {
+                    File.WriteAllBytes("out.pdf", pdfOutput);
+                    Process.Start("out.pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("The file is already open!");
+                }
             }
             catch (Exception ex)
             {
