@@ -10,6 +10,7 @@ namespace GenerarePDF
     {
         public List<TableSettings> Tables { get; set; }
         public List<Driver> Drivers { get; set; }
+        public Driver LastDriver { get; set; }
 
         public AppSettings()
         {

@@ -30,6 +30,8 @@
         {
             this.panelMain = new System.Windows.Forms.Panel();
             this.pnlBotton = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbDrivers = new System.Windows.Forms.ComboBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.txtCurrentDate = new System.Windows.Forms.TextBox();
             this.btnSettings = new System.Windows.Forms.Button();
@@ -51,6 +53,8 @@
             // pnlBotton
             // 
             this.pnlBotton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBotton.Controls.Add(this.label1);
+            this.pnlBotton.Controls.Add(this.cmbDrivers);
             this.pnlBotton.Controls.Add(this.lblDate);
             this.pnlBotton.Controls.Add(this.txtCurrentDate);
             this.pnlBotton.Controls.Add(this.btnSettings);
@@ -60,6 +64,29 @@
             this.pnlBotton.Name = "pnlBotton";
             this.pnlBotton.Size = new System.Drawing.Size(928, 53);
             this.pnlBotton.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(387, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Driver";
+            // 
+            // cmbDrivers
+            // 
+            this.cmbDrivers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDrivers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbDrivers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbDrivers.DisplayMember = "Name";
+            this.cmbDrivers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDrivers.FormattingEnabled = true;
+            this.cmbDrivers.Location = new System.Drawing.Point(428, 18);
+            this.cmbDrivers.Name = "cmbDrivers";
+            this.cmbDrivers.Size = new System.Drawing.Size(185, 21);
+            this.cmbDrivers.TabIndex = 4;
             // 
             // lblDate
             // 
@@ -138,6 +165,8 @@
         private System.Windows.Forms.Panel pnlContainer;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.TextBox txtCurrentDate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbDrivers;
     }
 }
 

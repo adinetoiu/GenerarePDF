@@ -275,7 +275,7 @@
             this.colEdit.MinimumWidth = 80;
             this.colEdit.Name = "colEdit";
             this.colEdit.Text = "Edit";
-            this.colEdit.Width = 80;
+            this.colEdit.Width = 90;
             // 
             // colDelete
             // 
@@ -284,7 +284,7 @@
             this.colDelete.MinimumWidth = 80;
             this.colDelete.Name = "colDelete";
             this.colDelete.Text = "Delete";
-            this.colDelete.Width = 80;
+            this.colDelete.Width = 90;
             // 
             // frmSettingsForm
             // 

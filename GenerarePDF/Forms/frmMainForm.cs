@@ -28,10 +28,17 @@ namespace GenerarePDF
                 _settings = new AppSettings();
                 string stringSettings = File.ReadAllText("appsettings.txt");
                 _settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
+
                 foreach (var table in _settings.Tables)
                 {
                     AddTable(table);
                 }
+                cmbDrivers.DataSource = _settings.Drivers;
+                if (_settings.LastDriver != null)
+                {
+                    cmbDrivers.SelectedItem = _settings.Drivers.Find(p => p.ID == _settings.LastDriver.ID);
+                }
+                cmbDrivers.SelectedIndexChanged += CmbDrivers_SelectedIndexChanged;
 
                 txtCurrentDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
             }
@@ -40,6 +47,7 @@ namespace GenerarePDF
                 MessageBox.Show(ex.Message);
             }
         }
+
 
         private void AddTable(TableSettings table)
         {
@@ -173,6 +181,24 @@ namespace GenerarePDF
                 frmSettingsForm form = new frmSettingsForm();
                 form.Init(_settings);
                 form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CmbDrivers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbDrivers.SelectedItem != null)
+                {
+                    _settings.LastDriver = cmbDrivers.SelectedItem as Driver;
+
+                    string stringSettings = JsonConvert.SerializeObject(_settings);
+                    File.WriteAllText("appsettings.txt", stringSettings);
+                }
             }
             catch (Exception ex)
             {
