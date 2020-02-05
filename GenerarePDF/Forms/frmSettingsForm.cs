@@ -84,13 +84,32 @@ namespace GenerarePDF
 
         private void btnAddTable_Click(object sender, EventArgs e)
         {
-            AddTable(null);
+            try
+            {
+                AddTable(null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnDriver_Click(object sender, EventArgs e)
         {
+            try
+            {
+                AddEditDriver(null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddEditDriver(Driver driver)
+        {
             frmAddEditDriver form = new frmAddEditDriver();
-            form.Init(null);
+            form.Init(driver);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(form.Driver.ID))
@@ -98,14 +117,45 @@ namespace GenerarePDF
                     form.Driver.ID = Guid.NewGuid().ToString();
                     _settings.Drivers.Add(form.Driver);
                     dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = null;
                     dataGridView1.DataSource = _settings.Drivers;
                 }
                 else
                 {
                     dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = null;
                     dataGridView1.DataSource = _settings.Drivers;
                 }
+            }
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 2)
+                {
+                    var selecteddriver = dataGridView1.Rows[e.RowIndex].DataBoundItem as Driver;
+                    if (selecteddriver != null)
+                    {
+                        AddEditDriver(selecteddriver);
+                    }
+                }
+                else if (e.ColumnIndex == 3)
+                {
+                    var selecteddriver = dataGridView1.Rows[e.RowIndex].DataBoundItem as Driver;
+                    if (selecteddriver != null)
+                    {
+                        _settings.Drivers.Remove(selecteddriver);
+                        dataGridView1.AutoGenerateColumns = false;
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = _settings.Drivers;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

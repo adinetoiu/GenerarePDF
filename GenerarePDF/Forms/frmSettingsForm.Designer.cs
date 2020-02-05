@@ -34,13 +34,13 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCompanyDetails = new System.Windows.Forms.Label();
-            this.txtCompanyDetails = new System.Windows.Forms.TextBox();
             this.txtSoftwareProvider = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtCompanyDetails = new System.Windows.Forms.TextBox();
+            this.lblCompanyDetails = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -52,8 +52,8 @@
             this.pnlBotton.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -128,53 +128,6 @@
             this.tabPage1.Text = "Company";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.AutoScroll = true;
-            this.tabPage2.Controls.Add(this.pnlContent);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(971, 488);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Tables";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(155, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(65, 59);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Logo";
-            // 
-            // lblCompanyDetails
-            // 
-            this.lblCompanyDetails.AutoSize = true;
-            this.lblCompanyDetails.Location = new System.Drawing.Point(35, 74);
-            this.lblCompanyDetails.Name = "lblCompanyDetails";
-            this.lblCompanyDetails.Size = new System.Drawing.Size(86, 13);
-            this.lblCompanyDetails.TabIndex = 3;
-            this.lblCompanyDetails.Text = "Company Details";
-            // 
-            // txtCompanyDetails
-            // 
-            this.txtCompanyDetails.AcceptsReturn = true;
-            this.txtCompanyDetails.Location = new System.Drawing.Point(155, 71);
-            this.txtCompanyDetails.Multiline = true;
-            this.txtCompanyDetails.Name = "txtCompanyDetails";
-            this.txtCompanyDetails.Size = new System.Drawing.Size(450, 100);
-            this.txtCompanyDetails.TabIndex = 4;
-            // 
             // txtSoftwareProvider
             // 
             this.txtSoftwareProvider.AcceptsReturn = true;
@@ -193,6 +146,53 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Software Provider";
             // 
+            // txtCompanyDetails
+            // 
+            this.txtCompanyDetails.AcceptsReturn = true;
+            this.txtCompanyDetails.Location = new System.Drawing.Point(155, 71);
+            this.txtCompanyDetails.Multiline = true;
+            this.txtCompanyDetails.Name = "txtCompanyDetails";
+            this.txtCompanyDetails.Size = new System.Drawing.Size(450, 100);
+            this.txtCompanyDetails.TabIndex = 4;
+            // 
+            // lblCompanyDetails
+            // 
+            this.lblCompanyDetails.AutoSize = true;
+            this.lblCompanyDetails.Location = new System.Drawing.Point(35, 74);
+            this.lblCompanyDetails.Name = "lblCompanyDetails";
+            this.lblCompanyDetails.Size = new System.Drawing.Size(86, 13);
+            this.lblCompanyDetails.TabIndex = 3;
+            this.lblCompanyDetails.Text = "Company Details";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Logo";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(155, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(65, 59);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.pnlContent);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(971, 488);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Tables";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridView1);
@@ -207,6 +207,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -218,6 +220,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(965, 436);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // panel1
             // 
@@ -231,6 +234,7 @@
             // 
             // btnDriver
             // 
+            this.btnDriver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDriver.Location = new System.Drawing.Point(872, 5);
             this.btnDriver.Name = "btnDriver";
             this.btnDriver.Size = new System.Drawing.Size(75, 23);
@@ -241,27 +245,46 @@
             // 
             // colName
             // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colName.DataPropertyName = "Name";
+            this.colName.FillWeight = 67.32284F;
+            this.colName.Frozen = true;
             this.colName.HeaderText = "Name";
+            this.colName.MinimumWidth = 200;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            this.colName.Width = 200;
             // 
             // colAddress
             // 
+            this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colAddress.DataPropertyName = "Address";
+            this.colAddress.FillWeight = 67.32284F;
+            this.colAddress.Frozen = true;
             this.colAddress.HeaderText = "Address";
+            this.colAddress.MinimumWidth = 300;
             this.colAddress.Name = "colAddress";
             this.colAddress.ReadOnly = true;
+            this.colAddress.Width = 300;
             // 
             // colEdit
             // 
-            this.colEdit.HeaderText = "";
+            this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colEdit.FillWeight = 165.3543F;
+            this.colEdit.HeaderText = "Edit";
+            this.colEdit.MinimumWidth = 80;
             this.colEdit.Name = "colEdit";
+            this.colEdit.Text = "Edit";
+            this.colEdit.Width = 80;
             // 
             // colDelete
             // 
-            this.colDelete.HeaderText = "";
+            this.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colDelete.HeaderText = "Delete";
+            this.colDelete.MinimumWidth = 80;
             this.colDelete.Name = "colDelete";
+            this.colDelete.Text = "Delete";
+            this.colDelete.Width = 80;
             // 
             // frmSettingsForm
             // 
@@ -279,8 +302,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);

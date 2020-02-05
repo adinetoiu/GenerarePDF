@@ -30,11 +30,11 @@
         {
             this.panelMain = new System.Windows.Forms.Panel();
             this.pnlBotton = new System.Windows.Forms.Panel();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.txtCurrentDate = new System.Windows.Forms.TextBox();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.pnlContainer = new System.Windows.Forms.Panel();
-            this.txtCurrentDate = new System.Windows.Forms.TextBox();
-            this.lblDate = new System.Windows.Forms.Label();
             this.pnlBotton.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +50,7 @@
             // 
             // pnlBotton
             // 
+            this.pnlBotton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlBotton.Controls.Add(this.lblDate);
             this.pnlBotton.Controls.Add(this.txtCurrentDate);
             this.pnlBotton.Controls.Add(this.btnSettings);
@@ -59,6 +60,24 @@
             this.pnlBotton.Name = "pnlBotton";
             this.pnlBotton.Size = new System.Drawing.Size(928, 53);
             this.pnlBotton.TabIndex = 1;
+            // 
+            // lblDate
+            // 
+            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(623, 21);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 3;
+            this.lblDate.Text = "Data";
+            // 
+            // txtCurrentDate
+            // 
+            this.txtCurrentDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCurrentDate.Location = new System.Drawing.Point(672, 18);
+            this.txtCurrentDate.Name = "txtCurrentDate";
+            this.txtCurrentDate.Size = new System.Drawing.Size(141, 20);
+            this.txtCurrentDate.TabIndex = 2;
             // 
             // btnSettings
             // 
@@ -73,7 +92,7 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Location = new System.Drawing.Point(826, 18);
+            this.btnPrint.Location = new System.Drawing.Point(824, 16);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 0;
@@ -90,24 +109,6 @@
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(928, 469);
             this.pnlContainer.TabIndex = 2;
-            // 
-            // txtCurrentDate
-            // 
-            this.txtCurrentDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCurrentDate.Location = new System.Drawing.Point(674, 20);
-            this.txtCurrentDate.Name = "txtCurrentDate";
-            this.txtCurrentDate.Size = new System.Drawing.Size(141, 20);
-            this.txtCurrentDate.TabIndex = 2;
-            // 
-            // lblDate
-            // 
-            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(625, 23);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(30, 13);
-            this.lblDate.TabIndex = 3;
-            this.lblDate.Text = "Data";
             // 
             // frmMainForm
             // 
