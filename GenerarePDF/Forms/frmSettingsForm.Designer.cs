@@ -43,12 +43,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDriver = new System.Windows.Forms.Button();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDriver = new System.Windows.Forms.Button();
             this.pnlBotton.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -175,11 +175,15 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Location = new System.Drawing.Point(155, 6);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(65, 59);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.pictureBox2.DoubleClick += new System.EventHandler(this.pictureBox2_DoubleClick);
             // 
             // tabPage2
             // 
@@ -221,27 +225,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(965, 436);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnDriver);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 439);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(965, 46);
-            this.panel1.TabIndex = 4;
-            // 
-            // btnDriver
-            // 
-            this.btnDriver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDriver.Location = new System.Drawing.Point(872, 5);
-            this.btnDriver.Name = "btnDriver";
-            this.btnDriver.Size = new System.Drawing.Size(75, 23);
-            this.btnDriver.TabIndex = 1;
-            this.btnDriver.Text = "Add Driver";
-            this.btnDriver.UseVisualStyleBackColor = true;
-            this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
             // 
             // colName
             // 
@@ -285,6 +268,27 @@
             this.colDelete.Name = "colDelete";
             this.colDelete.Text = "Delete";
             this.colDelete.Width = 90;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnDriver);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 439);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(965, 46);
+            this.panel1.TabIndex = 4;
+            // 
+            // btnDriver
+            // 
+            this.btnDriver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDriver.Location = new System.Drawing.Point(872, 5);
+            this.btnDriver.Name = "btnDriver";
+            this.btnDriver.Size = new System.Drawing.Size(75, 23);
+            this.btnDriver.TabIndex = 1;
+            this.btnDriver.Text = "Add Driver";
+            this.btnDriver.UseVisualStyleBackColor = true;
+            this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
             // 
             // frmSettingsForm
             // 

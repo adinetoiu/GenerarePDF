@@ -158,5 +158,41 @@ namespace GenerarePDF
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void pictureBox2_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadLogo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void LoadLogo()
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox2.Image = Image.FromFile(dlg.FileName);
+                }
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadLogo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
