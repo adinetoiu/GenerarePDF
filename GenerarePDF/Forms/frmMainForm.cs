@@ -213,10 +213,17 @@ namespace GenerarePDF
                                             {
                                                 totalScheduledDeductions += float.Parse(rows[row][column]);
                                             }
+                                            var cel = table.cell(row, column);
+                                            cel.SetValue("$" + rows[row][column]);
+                                            cel.style.textAlign = TextAlignment.center;
+                                            cel.style.fontColor = Color.DarkRed;
                                         }
-                                        var cel = table.cell(row, column);
-                                        cel.SetValue(rows[row][column]);
-                                        cel.style.textAlign = TextAlignment.center;
+                                        else
+                                        {
+                                            var cel = table.cell(row, column);
+                                            cel.SetValue(rows[row][column]);
+                                            cel.style.textAlign = TextAlignment.center;
+                                        }
                                     }
                                     tableHeight += 25;
                                 }
@@ -226,10 +233,30 @@ namespace GenerarePDF
                                 totalTable.width = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width + 3;
                                 totalTable.DisplayHeader = false;
                                 totalTable.addRow();
-                                var cel1 = table.cell(0, 0);
-                                cel1.SetValue("a");
-                                var cel2 = table.cell(0, 1);
-                                cel2.SetValue("b");
+                                var cel1 = totalTable.cell(0, 0);
+                                cel1.style.fontStyle = TableFontStyle.bold;
+                                cel1.SetValue("Total:");
+                                cel1.style.textAlign = TextAlignment.center;
+                                var cel2 = totalTable.cell(0, 1);
+                                cel2.style.fontStyle = TableFontStyle.bold;
+                                cel2.style.fontColor = Color.DarkRed;
+                                cel2.style.textAlign = TextAlignment.center;
+                                if (header.Contains("Trips"))
+                                {
+                                    cel2.SetValue("$" + totalTrips.ToString());
+                                }
+                                if (header.Contains("Advances"))
+                                {
+                                    cel2.SetValue("$" + totalAdvancedAndDeductions.ToString());
+                                }
+                                if (header.Contains("Credits"))
+                                {
+                                    cel2.SetValue("$" + totalCredits.ToString());
+                                }
+                                if (header.Contains("Scheduled"))
+                                {
+                                    cel2.SetValue("$" + totalScheduledDeductions.ToString());
+                                }
                                 document.Pages[0].Body.DrawTable(totalTable, table.width - totalTable.width + tableXStart + 3, lastHeigth + table.rowCount * 25 + 26);
                             }
                             lastHeigth += tableHeight + 140;
