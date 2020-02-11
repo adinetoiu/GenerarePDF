@@ -11,6 +11,9 @@ namespace GenerarePDF
         public List<TableSettings> Tables { get; set; }
         public List<Driver> Drivers { get; set; }
         public Driver LastDriver { get; set; }
+        public string LogoBase64 { get; set; }
+        public string CompanyDetails { get; set; }
+        public string SoftwareProvider { get; set; }
 
         public AppSettings()
         {

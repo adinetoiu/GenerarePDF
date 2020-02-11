@@ -15,10 +15,73 @@ namespace GenerarePDF
 {
     public partial class frmSettingsForm : Form
     {
+        #region Variables
         AppSettings _settings;
+        #endregion
+
+        #region Constructors
         public frmSettingsForm()
         {
             InitializeComponent();
+        }
+        #endregion
+
+        #region Methods
+
+        internal void Init(AppSettings settings)
+        {
+            _settings = settings;
+            if (!string.IsNullOrEmpty(_settings.LogoBase64))
+            {
+                byte[] content = Convert.FromBase64String(_settings.LogoBase64);
+                pictureBox2.Image = Image.FromStream(new MemoryStream(content));
+            }
+            txtCompanyDetails.Text = _settings.CompanyDetails;
+            txtSoftwareProvider.Text = _settings.SoftwareProvider;
+
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = _settings.Drivers;
+
+            foreach (var sett in settings.Tables)
+            {
+                AddTable(sett);
+            }
+        }
+
+        private void AddEditDriver(Driver driver)
+        {
+            frmAddEditDriver form = new frmAddEditDriver();
+            form.Init(driver);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(form.Driver.ID))
+                {
+                    form.Driver.ID = Guid.NewGuid().ToString();
+                    _settings.Drivers.Add(form.Driver);
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = _settings.Drivers;
+                }
+                else
+                {
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = _settings.Drivers;
+                }
+            }
+        }
+
+        private void LoadLogo()
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    _settings.LogoBase64 = Convert.ToBase64String(File.ReadAllBytes(dlg.FileName));
+                    pictureBox2.Image = Image.FromFile(dlg.FileName);
+                }
+            }
         }
 
         private void AddTable(TableSettings tableSett)
@@ -33,6 +96,10 @@ namespace GenerarePDF
             table.Init(tableSett);
         }
 
+        #endregion
+
+        #region Events
+
         private void Table_OnColumnSizeChanged(int size)
         {
             pnlContent.Height += size;
@@ -43,42 +110,6 @@ namespace GenerarePDF
             if (MessageBox.Show("Are you sure you want to delete table?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 pnlContent.Controls.Remove(item);
-            }
-        }
-
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _settings.Tables.Clear();
-                for (int i = pnlContent.Controls.Count - 1; i >= 0; i--)
-                {
-                    var control = pnlContent.Controls[i];
-                    if (control is ucTableSettings)
-                    {
-                        _settings.Tables.Add((control as ucTableSettings).GetTable());
-                    }
-                }
-                string stringSettings = JsonConvert.SerializeObject(_settings);
-                File.WriteAllText("appsettings.txt", stringSettings);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        internal void Init(AppSettings settings)
-        {
-            _settings = settings;
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.DataSource = _settings.Drivers;
-
-            foreach (var sett in settings.Tables)
-            {
-                AddTable(sett);
             }
         }
 
@@ -103,29 +134,6 @@ namespace GenerarePDF
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void AddEditDriver(Driver driver)
-        {
-            frmAddEditDriver form = new frmAddEditDriver();
-            form.Init(driver);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                if (string.IsNullOrEmpty(form.Driver.ID))
-                {
-                    form.Driver.ID = Guid.NewGuid().ToString();
-                    _settings.Drivers.Add(form.Driver);
-                    dataGridView1.AutoGenerateColumns = false;
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = _settings.Drivers;
-                }
-                else
-                {
-                    dataGridView1.AutoGenerateColumns = false;
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = _settings.Drivers;
-                }
             }
         }
 
@@ -171,18 +179,6 @@ namespace GenerarePDF
             }
         }
 
-        private void LoadLogo()
-        {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    pictureBox2.Image = Image.FromFile(dlg.FileName);
-                }
-            }
-        }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             try
@@ -194,5 +190,32 @@ namespace GenerarePDF
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _settings.CompanyDetails = txtCompanyDetails.Text;
+                _settings.SoftwareProvider = txtSoftwareProvider.Text;
+                _settings.Tables.Clear();
+                for (int i = pnlContent.Controls.Count - 1; i >= 0; i--)
+                {
+                    var control = pnlContent.Controls[i];
+                    if (control is ucTableSettings)
+                    {
+                        _settings.Tables.Add((control as ucTableSettings).GetTable());
+                    }
+                }
+                string stringSettings = JsonConvert.SerializeObject(_settings);
+                File.WriteAllText("appsettings.txt", stringSettings);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        #endregion
     }
 }
