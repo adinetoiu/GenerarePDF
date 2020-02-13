@@ -164,27 +164,6 @@ namespace GenerarePDF
                         document.Pages[0].Body.AddTextArea(new RectangleF(50, 170, 200, 200), _settings.LastDriver.Address, true);
                         #endregion
 
-                        #region footer
-                        document.PageFooter.SetActiveFont("Tahoma", PDFFontStyles.Regular, 9);
-                        if (!string.IsNullOrEmpty(_settings.CompanyDetails))
-                        {
-                            var lines = _settings.CompanyDetails.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                            string display = string.Empty;
-                            if (lines.Length > 0)
-                            {
-                                display = lines[0];
-                            }
-                            else
-                            {
-                                display = _settings.CompanyDetails;
-                            }
-                            display += System.Environment.NewLine + txtCurrentDate.Text;
-                            document.PageFooter.AddTextArea(new RectangleF(0, 0, 150, 30), display, false);
-                        }
-                        document.PageFooter.AddTextArea(new RectangleF(240, 0, 250, 50), _settings.SoftwareProvider, false);
-                        document.PageFooter.AddTextArea(new RectangleF(513, 0, 100, 30), "page 1 Of 1", false);
-                        #endregion
-
                         double lastHeigth = 300f;
                         double tableHeight = 0;
 
@@ -241,8 +220,10 @@ namespace GenerarePDF
                                         }
                                         if (columns[column].Name.Equals("Amount"))
                                         {
+                                            var cel = table.cell(row, column);
                                             if (header.Contains("Trips"))
                                             {
+                                                cel.style.fontStyle = TableFontStyle.bold; 
                                                 totalTrips += float.Parse(rows[row][column]);
                                             }
                                             if (header.Contains("Advances"))
@@ -257,62 +238,127 @@ namespace GenerarePDF
                                             {
                                                 totalScheduledDeductions += float.Parse(rows[row][column]);
                                             }
-                                            var cel = table.cell(row, column);
+ 
                                             cel.SetValue("$" + rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
-                                            cel.style.fontColor = Color.DarkRed;
+                                            cel.style.fontColor = Color.Black;
+                                            cel.style.borderColor = Color.Black;
                                         }
                                         else
                                         {
                                             var cel = table.cell(row, column);
                                             cel.SetValue(rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
+                                            cel.style.borderColor = Color.Black;
                                         }
                                     }
                                     tableHeight += 25;
                                 }
                                 int tableXStart = -60;
 
-                                //table.addRow();
-                                //var cel11 = table.cell(0, 0);
-                                //cel11.style.borderTopWidth = 0;
+                                #region Add row for total
+                                table.addRow();
+                                for (int column = 0; column < columns.Count; column++)
+                                {
+                                    var cell = table.cell(table.rowCount - 1, column);
+                                    cell.style.fontStyle = TableFontStyle.bold;
+                                    if (column == columns.Count - 1)
+                                    {
+                                        if (header.Contains("Trips"))
+                                        {
+                                            cell.SetValue("$" + totalTrips.ToString());
+                                        }
+                                        if (header.Contains("Advances"))
+                                        {
+                                            cell.SetValue("$" + totalAdvancedAndDeductions.ToString());
+                                        }
+                                        if (header.Contains("Credits"))
+                                        {
+                                            cell.SetValue("$" + totalCredits.ToString());
+                                        }
+                                        if (header.Contains("Scheduled"))
+                                        {
+                                            cell.SetValue("$" + totalScheduledDeductions.ToString());
+                                        }
+                                        cell.style.textAlign = TextAlignment.center;
+                                        cell.style.borderColor = Color.Black;
+                                        cell.style.fontColor = Color.DarkRed;
+                                    }
+                                    else
+                                    {
+                                        cell.style.borderType = borderType.none;
 
+                                        cell.style.backgroundColor = Color.White;
+                                        cell.style.borderLeftColor = Color.White;
+
+                                    }
+                                }
+                                #endregion
+
+
+                                #region Add Check Amount
+                                if (j == 0)
+                                {
+                                    if (totalTrips > 0)
+                                    {
+                                        totalCheckAmount += totalTrips;
+                                    }
+                                    if (totalAdvancedAndDeductions > 0)
+                                    {
+                                        totalCheckAmount -= totalAdvancedAndDeductions;
+                                    }
+                                    if (totalCredits > 0)
+                                    {
+                                    }
+                                    if (totalScheduledDeductions > 0)
+                                    {
+                                    }
+
+                                    table.addRow();
+
+                                    for (int column = 0; column < columns.Count; column++)
+                                    {
+                                        var cell = table.cell(table.rowCount - 1, column);
+                                        cell.style.borderType = borderType.none;
+                                        cell.style.backgroundColor = Color.White;
+                                    }
+                                    table.addRow();
+
+                                    for (int column = 0; column < columns.Count; column++)
+                                    {
+                                        if (column < columns.Count - 2)
+                                        {
+                                            var cell = table.cell(table.rowCount - 1, column);
+                                            cell.style.borderType = borderType.none;
+                                            cell.style.backgroundColor = Color.White;
+                                        }
+                                        else if (column < columns.Count - 1)
+                                        {
+                                            var cel1 = table.cell(table.rowCount - 1, column);
+                                            cel1.style.fontStyle = TableFontStyle.bold;
+                                            cel1.SetValue("Check Amount:");
+                                            cel1.style.textAlign = TextAlignment.center;
+                                            cel1.style.borderColor = Color.Black;
+                                        }
+                                        else
+                                        {
+                                            var cel2 = table.cell(table.rowCount - 1, column);
+                                            cel2.style.fontStyle = TableFontStyle.bold;
+                                            cel2.style.fontColor = Color.DarkRed;
+                                            cel2.style.textAlign = TextAlignment.center;
+                                            cel2.style.borderColor = Color.Black;
+                                            cel2.SetValue("$" + totalCheckAmount.ToString());
+                                            cel2.style.fontColor = Color.DarkRed;
+                                        }
+                                    }
+                                }
+
+                                #endregion
+
+                                table.style.borderBottomColor = Color.White;
+                                table.style.borderLeftColor = Color.White;
                                 document.Pages[0].Body.DrawTable(table, tableXStart, lastHeigth);
 
-
-
-                                //Table totalTable = new Table(2);
-                                //lastTotalWidth = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width + 3;
-                                //totalTable.width = lastTotalWidth;
-                                //totalTable.DisplayHeader = false;
-                                //totalTable.addRow();
-                                //var celT1 = totalTable.cell(0, 0);
-                                //celT1.style.fontStyle = TableFontStyle.bold;
-                                //celT1.SetValue("Total:");
-                                //celT1.style.textAlign = TextAlignment.center;
-                                //var celT2 = totalTable.cell(0, 1);
-                                //celT2.style.fontStyle = TableFontStyle.bold;
-                                //celT2.style.fontColor = Color.DarkRed;
-                                //celT2.style.textAlign = TextAlignment.center;
-                                //if (header.Contains("Trips"))
-                                //{
-                                //    celT2.SetValue("$" + totalTrips.ToString());
-                                //}
-                                //if (header.Contains("Advances"))
-                                //{
-                                //    celT2.SetValue("$" + totalAdvancedAndDeductions.ToString());
-                                //}
-                                //if (header.Contains("Credits"))
-                                //{
-                                //    celT2.SetValue("$" + totalCredits.ToString());
-                                //}
-                                //if (header.Contains("Scheduled"))
-                                //{
-                                //    celT2.SetValue("$" + totalScheduledDeductions.ToString());
-                                //}
-                                //lastTotalLeft = table.width - totalTable.width + tableXStart + 3;
-                                //lastTotalTop = lastHeigth + table.rowCount * 25 + 26;
-                                //document.Pages[0].Body.DrawTable(totalTable, lastTotalLeft, lastTotalTop);
                             }
                             lastHeigth += tableHeight + 140;
                         }
@@ -320,36 +366,61 @@ namespace GenerarePDF
                         #region Total
                         if (lastTotalWidth > 0)
                         {
-                            Table checkAmountTable = new Table(2);
-                            checkAmountTable.width = lastTotalWidth;
-                            checkAmountTable.DisplayHeader = false;
-                            checkAmountTable.addRow();
-                            var cel1 = checkAmountTable.cell(0, 0);
-                            cel1.style.fontStyle = TableFontStyle.bold;
-                            cel1.SetValue("Check Amount:");
-                            cel1.style.textAlign = TextAlignment.center;
-                            var cel2 = checkAmountTable.cell(0, 1);
-                            cel2.style.fontStyle = TableFontStyle.bold;
-                            cel2.style.fontColor = Color.DarkRed;
-                            cel2.style.textAlign = TextAlignment.center;
 
-                            if (totalTrips > 0)
-                            {
-                                totalCheckAmount += totalTrips;
-                            }
-                            if (totalAdvancedAndDeductions > 0)
-                            {
-                                totalCheckAmount += totalTrips;
-                            }
-                            if (totalCredits > 0)
-                            {
-                            }
-                            if (totalScheduledDeductions > 0)
-                            {
-                            }
+                            //Table checkAmountTable = new Table(2);
+                            //checkAmountTable.width = lastTotalWidth;
+                            //checkAmountTable.DisplayHeader = false;
+                            //checkAmountTable.addRow();
+                            //var cel1 = checkAmountTable.cell(0, 0);
+                            //cel1.style.fontStyle = TableFontStyle.bold;
+                            //cel1.SetValue("Check Amount:");
+                            //cel1.style.textAlign = TextAlignment.center;
+                            //var cel2 = checkAmountTable.cell(0, 1);
+                            //cel2.style.fontStyle = TableFontStyle.bold;
+                            //cel2.style.fontColor = Color.DarkRed;
+                            //cel2.style.textAlign = TextAlignment.center;
 
-                            cel2.SetValue("$" + totalCheckAmount.ToString());
-                            document.Pages[0].Body.DrawTable(checkAmountTable, lastTotalLeft, lastTotalTop + 50);
+                            //if (totalTrips > 0)
+                            //{
+                            //    totalCheckAmount += totalTrips;
+                            //}
+                            //if (totalAdvancedAndDeductions > 0)
+                            //{
+                            //    totalCheckAmount += totalTrips;
+                            //}
+                            //if (totalCredits > 0)
+                            //{
+                            //}
+                            //if (totalScheduledDeductions > 0)
+                            //{
+                            //}
+
+                            //cel2.SetValue("$" + totalCheckAmount.ToString());
+                            //document.Pages[0].Body.DrawTable(checkAmountTable, lastTotalLeft, lastTotalTop + 50);
+                        }
+                        #endregion
+
+                        #region footer
+                        for (int i = 0; i < document.PageCount; i++)
+                        {
+                            document.Pages[i].Footer.SetActiveFont("Tahoma", PDFFontStyles.Regular, 9);
+                            if (!string.IsNullOrEmpty(_settings.CompanyDetails))
+                            {
+                                var lines = _settings.CompanyDetails.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                                string display = string.Empty;
+                                if (lines.Length > 0)
+                                {
+                                    display = lines[0];
+                                }
+                                else
+                                {
+                                    display = _settings.CompanyDetails;
+                                }
+                                display += System.Environment.NewLine + txtCurrentDate.Text;
+                                document.Pages[i].Footer.AddTextArea(new RectangleF(0, 0, 150, 30), display, false);
+                            }
+                            document.Pages[i].Footer.AddTextArea(new RectangleF(240, 0, 250, 50), _settings.SoftwareProvider, false);
+                            document.Pages[i].Footer.AddTextArea(new RectangleF(513, 0, 100, 30), string.Format("page {0} Of {1}", i + 1, document.PageCount), false);
                         }
                         #endregion
 
