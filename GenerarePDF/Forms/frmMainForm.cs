@@ -206,6 +206,10 @@ namespace GenerarePDF
                                 string header = (control as ucTable).GetHeader();
                                 List<ColumnSettings> columns = (control as ucTable).GetColumns();
                                 List<List<string>> rows = (control as ucTable).GetRowsValues();
+                                if (rows == null || rows.Count == 0)
+                                {
+                                    continue;
+                                }
 
                                 document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
                                 document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
@@ -222,6 +226,10 @@ namespace GenerarePDF
 
                                 for (int row = 0; row < rows.Count; row++)
                                 {
+                                    if (string.IsNullOrEmpty(rows[row][columns.Count - 1]))
+                                    {
+                                        continue;
+                                    }
                                     table.addRow();
                                     for (int column = 0; column < columns.Count; column++)
                                     {
@@ -264,74 +272,85 @@ namespace GenerarePDF
                                     tableHeight += 25;
                                 }
                                 int tableXStart = -60;
+
+                                //table.addRow();
+                                //var cel11 = table.cell(0, 0);
+                                //cel11.style.borderTopWidth = 0;
+
                                 document.Pages[0].Body.DrawTable(table, tableXStart, lastHeigth);
-                                Table totalTable = new Table(2);
-                                lastTotalWidth = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width + 3;
-                                totalTable.width = lastTotalWidth;
-                                totalTable.DisplayHeader = false;
-                                totalTable.addRow();
-                                var celT1 = totalTable.cell(0, 0);
-                                celT1.style.fontStyle = TableFontStyle.bold;
-                                celT1.SetValue("Total:");
-                                celT1.style.textAlign = TextAlignment.center;
-                                var celT2 = totalTable.cell(0, 1);
-                                celT2.style.fontStyle = TableFontStyle.bold;
-                                celT2.style.fontColor = Color.DarkRed;
-                                celT2.style.textAlign = TextAlignment.center;
-                                if (header.Contains("Trips"))
-                                {
-                                    celT2.SetValue("$" + totalTrips.ToString());
-                                }
-                                if (header.Contains("Advances"))
-                                {
-                                    celT2.SetValue("$" + totalAdvancedAndDeductions.ToString());
-                                }
-                                if (header.Contains("Credits"))
-                                {
-                                    celT2.SetValue("$" + totalCredits.ToString());
-                                }
-                                if (header.Contains("Scheduled"))
-                                {
-                                    celT2.SetValue("$" + totalScheduledDeductions.ToString());
-                                }
-                                lastTotalLeft = table.width - totalTable.width + tableXStart + 3;
-                                lastTotalTop = lastHeigth + table.rowCount * 25 + 26;
-                                document.Pages[0].Body.DrawTable(totalTable, lastTotalLeft, lastTotalTop);
+
+
+
+                                //Table totalTable = new Table(2);
+                                //lastTotalWidth = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width + 3;
+                                //totalTable.width = lastTotalWidth;
+                                //totalTable.DisplayHeader = false;
+                                //totalTable.addRow();
+                                //var celT1 = totalTable.cell(0, 0);
+                                //celT1.style.fontStyle = TableFontStyle.bold;
+                                //celT1.SetValue("Total:");
+                                //celT1.style.textAlign = TextAlignment.center;
+                                //var celT2 = totalTable.cell(0, 1);
+                                //celT2.style.fontStyle = TableFontStyle.bold;
+                                //celT2.style.fontColor = Color.DarkRed;
+                                //celT2.style.textAlign = TextAlignment.center;
+                                //if (header.Contains("Trips"))
+                                //{
+                                //    celT2.SetValue("$" + totalTrips.ToString());
+                                //}
+                                //if (header.Contains("Advances"))
+                                //{
+                                //    celT2.SetValue("$" + totalAdvancedAndDeductions.ToString());
+                                //}
+                                //if (header.Contains("Credits"))
+                                //{
+                                //    celT2.SetValue("$" + totalCredits.ToString());
+                                //}
+                                //if (header.Contains("Scheduled"))
+                                //{
+                                //    celT2.SetValue("$" + totalScheduledDeductions.ToString());
+                                //}
+                                //lastTotalLeft = table.width - totalTable.width + tableXStart + 3;
+                                //lastTotalTop = lastHeigth + table.rowCount * 25 + 26;
+                                //document.Pages[0].Body.DrawTable(totalTable, lastTotalLeft, lastTotalTop);
                             }
                             lastHeigth += tableHeight + 140;
                         }
 
                         #region Total
-                        Table checkAmountTable = new Table(2);
-                        checkAmountTable.width = lastTotalWidth;
-                        checkAmountTable.DisplayHeader = false;
-                        checkAmountTable.addRow();
-                        var cel1 = checkAmountTable.cell(0, 0);
-                        cel1.style.fontStyle = TableFontStyle.bold;
-                        cel1.SetValue("Check Amount:");
-                        cel1.style.textAlign = TextAlignment.center;
-                        var cel2 = checkAmountTable.cell(0, 1);
-                        cel2.style.fontStyle = TableFontStyle.bold;
-                        cel2.style.fontColor = Color.DarkRed;
-                        cel2.style.textAlign = TextAlignment.center;
+                        if (lastTotalWidth > 0)
+                        {
+                            Table checkAmountTable = new Table(2);
+                            checkAmountTable.width = lastTotalWidth;
+                            checkAmountTable.DisplayHeader = false;
+                            checkAmountTable.addRow();
+                            var cel1 = checkAmountTable.cell(0, 0);
+                            cel1.style.fontStyle = TableFontStyle.bold;
+                            cel1.SetValue("Check Amount:");
+                            cel1.style.textAlign = TextAlignment.center;
+                            var cel2 = checkAmountTable.cell(0, 1);
+                            cel2.style.fontStyle = TableFontStyle.bold;
+                            cel2.style.fontColor = Color.DarkRed;
+                            cel2.style.textAlign = TextAlignment.center;
 
-                        if (totalTrips > 0)
-                        {
-                            totalCheckAmount += totalTrips;
-                        }
-                        if (totalAdvancedAndDeductions > 0)
-                        {
-                            totalCheckAmount += totalTrips;
-                        }
-                        if (totalCredits > 0)
-                        {
-                        }
-                        if (totalScheduledDeductions > 0)
-                        {
-                        }
+                            if (totalTrips > 0)
+                            {
+                                totalCheckAmount += totalTrips;
+                            }
+                            if (totalAdvancedAndDeductions > 0)
+                            {
+                                totalCheckAmount += totalTrips;
+                            }
+                            if (totalCredits > 0)
+                            {
+                            }
+                            if (totalScheduledDeductions > 0)
+                            {
+                            }
 
-                        cel2.SetValue("$" + totalCheckAmount.ToString());
-                        document.Pages[0].Body.DrawTable(checkAmountTable, lastTotalLeft, lastTotalTop + 50);
+                            cel2.SetValue("$" + totalCheckAmount.ToString());
+                            document.Pages[0].Body.DrawTable(checkAmountTable, lastTotalLeft, lastTotalTop + 50);
+                        }
                         #endregion
 
                         document.Save();
