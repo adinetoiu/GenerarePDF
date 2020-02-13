@@ -86,6 +86,38 @@ namespace GenerarePDF
             }
         }
 
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSettingsForm form = new frmSettingsForm();
+                form.Init(_settings);
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CmbDrivers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbDrivers.SelectedItem != null)
+                {
+                    _settings.LastDriver = cmbDrivers.SelectedItem as Driver;
+
+                    string stringSettings = JsonConvert.SerializeObject(_settings);
+                    File.WriteAllText("appsettings.txt", stringSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             try
@@ -162,6 +194,10 @@ namespace GenerarePDF
                         float totalScheduledDeductions = 0;
                         float totalCheckAmount = 0;
 
+                        double lastTotalLeft = 0;
+                        double lastTotalTop = 0;
+                        double lastTotalWidth = 0;
+
                         for (int j = panelMain.Controls.Count - 1; j >= 0; j--)
                         {
                             var control = panelMain.Controls[j];
@@ -230,37 +266,74 @@ namespace GenerarePDF
                                 int tableXStart = -60;
                                 document.Pages[0].Body.DrawTable(table, tableXStart, lastHeigth);
                                 Table totalTable = new Table(2);
-                                totalTable.width = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width + 3;
+                                lastTotalWidth = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width + 3;
+                                totalTable.width = lastTotalWidth;
                                 totalTable.DisplayHeader = false;
                                 totalTable.addRow();
-                                var cel1 = totalTable.cell(0, 0);
-                                cel1.style.fontStyle = TableFontStyle.bold;
-                                cel1.SetValue("Total:");
-                                cel1.style.textAlign = TextAlignment.center;
-                                var cel2 = totalTable.cell(0, 1);
-                                cel2.style.fontStyle = TableFontStyle.bold;
-                                cel2.style.fontColor = Color.DarkRed;
-                                cel2.style.textAlign = TextAlignment.center;
+                                var celT1 = totalTable.cell(0, 0);
+                                celT1.style.fontStyle = TableFontStyle.bold;
+                                celT1.SetValue("Total:");
+                                celT1.style.textAlign = TextAlignment.center;
+                                var celT2 = totalTable.cell(0, 1);
+                                celT2.style.fontStyle = TableFontStyle.bold;
+                                celT2.style.fontColor = Color.DarkRed;
+                                celT2.style.textAlign = TextAlignment.center;
                                 if (header.Contains("Trips"))
                                 {
-                                    cel2.SetValue("$" + totalTrips.ToString());
+                                    celT2.SetValue("$" + totalTrips.ToString());
                                 }
                                 if (header.Contains("Advances"))
                                 {
-                                    cel2.SetValue("$" + totalAdvancedAndDeductions.ToString());
+                                    celT2.SetValue("$" + totalAdvancedAndDeductions.ToString());
                                 }
                                 if (header.Contains("Credits"))
                                 {
-                                    cel2.SetValue("$" + totalCredits.ToString());
+                                    celT2.SetValue("$" + totalCredits.ToString());
                                 }
                                 if (header.Contains("Scheduled"))
                                 {
-                                    cel2.SetValue("$" + totalScheduledDeductions.ToString());
+                                    celT2.SetValue("$" + totalScheduledDeductions.ToString());
                                 }
-                                document.Pages[0].Body.DrawTable(totalTable, table.width - totalTable.width + tableXStart + 3, lastHeigth + table.rowCount * 25 + 26);
+                                lastTotalLeft = table.width - totalTable.width + tableXStart + 3;
+                                lastTotalTop = lastHeigth + table.rowCount * 25 + 26;
+                                document.Pages[0].Body.DrawTable(totalTable, lastTotalLeft, lastTotalTop);
                             }
                             lastHeigth += tableHeight + 140;
                         }
+
+                        #region Total
+                        Table checkAmountTable = new Table(2);
+                        checkAmountTable.width = lastTotalWidth;
+                        checkAmountTable.DisplayHeader = false;
+                        checkAmountTable.addRow();
+                        var cel1 = checkAmountTable.cell(0, 0);
+                        cel1.style.fontStyle = TableFontStyle.bold;
+                        cel1.SetValue("Check Amount:");
+                        cel1.style.textAlign = TextAlignment.center;
+                        var cel2 = checkAmountTable.cell(0, 1);
+                        cel2.style.fontStyle = TableFontStyle.bold;
+                        cel2.style.fontColor = Color.DarkRed;
+                        cel2.style.textAlign = TextAlignment.center;
+
+                        if (totalTrips > 0)
+                        {
+                            totalCheckAmount += totalTrips;
+                        }
+                        if (totalAdvancedAndDeductions > 0)
+                        {
+                            totalCheckAmount += totalTrips;
+                        }
+                        if (totalCredits > 0)
+                        {
+                        }
+                        if (totalScheduledDeductions > 0)
+                        {
+                        }
+
+                        cel2.SetValue("$" + totalCheckAmount.ToString());
+                        document.Pages[0].Body.DrawTable(checkAmountTable, lastTotalLeft, lastTotalTop + 50);
+                        #endregion
+
                         document.Save();
                         pdfOutput = outputMs.ToArray();
                     }
@@ -278,38 +351,6 @@ namespace GenerarePDF
             catch (Exception ex)
             {
                 throw ex;
-            }
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                frmSettingsForm form = new frmSettingsForm();
-                form.Init(_settings);
-                form.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void CmbDrivers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (cmbDrivers.SelectedItem != null)
-                {
-                    _settings.LastDriver = cmbDrivers.SelectedItem as Driver;
-
-                    string stringSettings = JsonConvert.SerializeObject(_settings);
-                    File.WriteAllText("appsettings.txt", stringSettings);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
     }
