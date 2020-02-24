@@ -171,14 +171,14 @@ namespace GenerarePDF
                         #region Driver
                         document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
                         document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 14.25);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(450, -40, 200, 200), "Statement #" + txtStatement.Text, true);
+                        document.Pages[0].Body.AddTextArea(new RectangleF(480, -40, 200, 200), "Statement #" + txtStatement.Text, true);
                         document.Pages[0].Body.AddTextArea(new RectangleF(450, -20, 200, 200), _settings.LastDriver.Name, true);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(450, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
+                        document.Pages[0].Body.AddTextArea(new RectangleF(490, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
 
                         document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
                         document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
                         document.Pages[0].Body.AddTextArea(new RectangleF(50, 150, 200, 200), _settings.LastDriver.Name, true);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(50, 170, 200, 200), _settings.LastDriver.Address, true);
+                        document.Pages[0].Body.AddTextArea(new RectangleF(50, 165, 200, 200), _settings.LastDriver.Address, true);
                         #endregion
 
                         double lastHeigth = 300f;
@@ -437,7 +437,7 @@ namespace GenerarePDF
                                 document.Pages[i].Footer.AddTextArea(new RectangleF(0, 0, 150, 30), display, false);
                             }
                             document.Pages[i].Footer.AddTextArea(new RectangleF(240, 0, 250, 50), _settings.SoftwareProvider, false);
-                            document.Pages[i].Footer.AddTextArea(new RectangleF(513, 0, 100, 30), string.Format("page {0} Of {1}", i + 1, document.PageCount), false);
+                            document.Pages[i].Footer.AddTextArea(new RectangleF(513, 0, 100, 30), string.Format("page {0} of {1}", i + 1, document.PageCount), false);
                         }
                         #endregion
 
