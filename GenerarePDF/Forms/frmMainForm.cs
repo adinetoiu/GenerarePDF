@@ -25,19 +25,7 @@ namespace GenerarePDF
             {
                 PDFDocument.License = "UOEIOBIR-2051-191-P0050";
                 InitializeComponent();
-                _settings = new AppSettings();
-                string stringSettings = File.ReadAllText("appsettings.txt");
-                _settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
-
-                foreach (var table in _settings.Tables)
-                {
-                    AddTable(table);
-                }
-                cmbDrivers.DataSource = _settings.Drivers;
-                if (_settings.LastDriver != null)
-                {
-                    cmbDrivers.SelectedItem = _settings.Drivers.Find(p => p.ID == _settings.LastDriver.ID);
-                }
+                LoadSettings();
                 cmbDrivers.SelectedIndexChanged += CmbDrivers_SelectedIndexChanged;
 
                 datCurrentDate.Value = DateTime.Now;
@@ -48,6 +36,22 @@ namespace GenerarePDF
             }
         }
 
+        private void LoadSettings()
+        {
+            _settings = new AppSettings();
+            string stringSettings = File.ReadAllText("appsettings.txt");
+            _settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
+
+            foreach (var table in _settings.Tables)
+            {
+                AddTable(table);
+            }
+            cmbDrivers.DataSource = _settings.Drivers;
+            if (_settings.LastDriver != null)
+            {
+                cmbDrivers.SelectedItem = _settings.Drivers.Find(p => p.ID == _settings.LastDriver.ID);
+            }
+        }
 
         private void AddTable(TableSettings table)
         {
@@ -93,6 +97,19 @@ namespace GenerarePDF
                 frmSettingsForm form = new frmSettingsForm();
                 form.Init(_settings);
                 form.ShowDialog();
+                form.FormClosed += Form_FormClosed;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                LoadSettings();
             }
             catch (Exception ex)
             {
