@@ -40,7 +40,7 @@ namespace GenerarePDF
                 }
                 cmbDrivers.SelectedIndexChanged += CmbDrivers_SelectedIndexChanged;
 
-                txtCurrentDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
+                datCurrentDate.Value = DateTime.Now;
             }
             catch (Exception ex)
             {
@@ -142,7 +142,7 @@ namespace GenerarePDF
                         logo.Width = 100;
                         logo.Height = 100;
                         logo.KeepAspectRatio = true;
-                        document.Pages[0].Body.AddImage(logo, -50, -30);
+                        document.Pages[0].Body.AddImage(logo, -50, -20);
                         #endregion
 
                         #region Company Details
@@ -154,9 +154,9 @@ namespace GenerarePDF
                         #region Driver
                         document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
                         document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 14.25);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(450, -50, 200, 200), "Statement #1", true);
+                        document.Pages[0].Body.AddTextArea(new RectangleF(450, -40, 200, 200), "Statement #" + txtStatement.Text, true);
                         document.Pages[0].Body.AddTextArea(new RectangleF(450, -20, 200, 200), _settings.LastDriver.Name, true);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(450, 10, 200, 200), txtCurrentDate.Text.ToString(), true);
+                        document.Pages[0].Body.AddTextArea(new RectangleF(450, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
 
                         document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
                         document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
@@ -223,7 +223,7 @@ namespace GenerarePDF
                                             var cel = table.cell(row, column);
                                             if (header.Contains("Trips"))
                                             {
-                                                cel.style.fontStyle = TableFontStyle.bold; 
+                                                cel.style.fontStyle = TableFontStyle.bold;
                                                 totalTrips += float.Parse(rows[row][column]);
                                             }
                                             if (header.Contains("Advances"))
@@ -238,7 +238,7 @@ namespace GenerarePDF
                                             {
                                                 totalScheduledDeductions += float.Parse(rows[row][column]);
                                             }
- 
+
                                             cel.SetValue("$" + rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
                                             cel.style.fontColor = Color.Black;
@@ -416,7 +416,7 @@ namespace GenerarePDF
                                 {
                                     display = _settings.CompanyDetails;
                                 }
-                                display += System.Environment.NewLine + txtCurrentDate.Text;
+                                display += System.Environment.NewLine + datCurrentDate.Value.ToString("MM/dd/yyyy");
                                 document.Pages[i].Footer.AddTextArea(new RectangleF(0, 0, 150, 30), display, false);
                             }
                             document.Pages[i].Footer.AddTextArea(new RectangleF(240, 0, 250, 50), _settings.SoftwareProvider, false);
