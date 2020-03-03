@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenerarePDF.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace GenerarePDF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMainForm());
+            Application.Run(new frmStart());
         }
     }
 }

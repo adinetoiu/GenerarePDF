@@ -18,6 +18,7 @@ namespace GenerarePDF
     public partial class frmMainForm : Form
     {
         public AppSettings _settings;
+        List<int> _tableIDs;
 
         public frmMainForm()
         {
@@ -25,6 +26,17 @@ namespace GenerarePDF
             {
                 PDFDocument.License = "UOEIOBIR-2051-191-P0050";
                 InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void frmMainForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 LoadSettings();
                 cmbDrivers.SelectedIndexChanged += CmbDrivers_SelectedIndexChanged;
 
@@ -36,6 +48,11 @@ namespace GenerarePDF
             }
         }
 
+        public void Init(List<int> tables)
+        {
+            _tableIDs = tables;
+        }
+
         private void LoadSettings()
         {
             _settings = new AppSettings();
@@ -44,7 +61,22 @@ namespace GenerarePDF
 
             foreach (var table in _settings.Tables)
             {
-                AddTable(table);
+                if (table.Header.Contains("Trips") && _tableIDs.Contains(1))
+                {
+                    AddTable(table);
+                }
+                else if (table.Header.Contains("Advances") && _tableIDs.Contains(2))
+                {
+                    AddTable(table);
+                }
+                else if (table.Header.Contains("Scheduled") && _tableIDs.Contains(3))
+                {
+                    AddTable(table);
+                }
+                else if (table.Header.Contains("Credits") && _tableIDs.Contains(4))
+                {
+                    AddTable(table);
+                }
             }
             cmbDrivers.DataSource = _settings.Drivers;
             if (_settings.LastDriver != null)
@@ -326,6 +358,7 @@ namespace GenerarePDF
                                     }
                                     if (totalCredits > 0)
                                     {
+                                        totalCheckAmount += totalTrips;
                                     }
                                     if (totalScheduledDeductions > 0)
                                     {
@@ -460,5 +493,7 @@ namespace GenerarePDF
                 throw ex;
             }
         }
+
+
     }
 }

@@ -172,6 +172,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMainForm_Load);
             this.pnlBotton.ResumeLayout(false);
             this.pnlBotton.PerformLayout();
             this.pnlContainer.ResumeLayout(false);
