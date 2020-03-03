@@ -26,6 +26,10 @@ namespace GenerarePDF
                 {
                     rowValues.Add((ctrl as TextBox).Text);
                 }
+                if (ctrl is DateTimePicker)
+                {
+                    rowValues.Add((ctrl as DateTimePicker).Value.ToString("MM/dd/yyyy"));
+                }
             }
             return rowValues;
         }
@@ -44,11 +48,23 @@ namespace GenerarePDF
             {
                 this.tlpColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, table.Columns[i].Percentage));
                 tlpColumns.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-                TextBox textbox = new TextBox();
-                tlpColumns.Controls.Add(textbox);
-                tlpColumns.SetColumn(textbox, i);
-                tlpColumns.SetRow(textbox, 0);
-                textbox.Dock = DockStyle.Fill;
+                if (table.Columns[i].Name.Equals("Date"))
+                {
+                    DateTimePicker textbox = new DateTimePicker();
+                    textbox.Format = DateTimePickerFormat.Short;
+                    tlpColumns.Controls.Add(textbox);
+                    tlpColumns.SetColumn(textbox, i);
+                    tlpColumns.SetRow(textbox, 0);
+                    textbox.Dock = DockStyle.Fill;
+                }
+                else
+                {
+                    TextBox textbox = new TextBox();
+                    tlpColumns.Controls.Add(textbox);
+                    tlpColumns.SetColumn(textbox, i);
+                    tlpColumns.SetRow(textbox, 0);
+                    textbox.Dock = DockStyle.Fill;
+                }
             }
         }
 
