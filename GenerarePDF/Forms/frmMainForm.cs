@@ -336,10 +336,6 @@ namespace GenerarePDF
                                     else
                                     {
                                         cell.style.borderType = borderType.none;
-
-                                        cell.style.backgroundColor = Color.White;
-                                        cell.style.borderLeftColor = Color.White;
-
                                     }
                                 }
                                 #endregion
@@ -366,11 +362,11 @@ namespace GenerarePDF
 
                                     table.addRow();
 
-                                    for (int column = 0; column < columns.Count; column++)
+                                    for (int column = 0; column < columns.Count - 1; column++)
                                     {
                                         var cell = table.cell(table.rowCount - 1, column);
                                         cell.style.borderType = borderType.none;
-                                        cell.style.backgroundColor = Color.White;
+                                        cell.style.backgroundColor = Color.White;//Spatiu pentru ultimul tabel
                                     }
                                     table.addRow();
 
@@ -380,7 +376,8 @@ namespace GenerarePDF
                                         {
                                             var cell = table.cell(table.rowCount - 1, column);
                                             cell.style.borderType = borderType.none;
-                                            cell.style.backgroundColor = Color.White;
+                                            cell.style.backgroundColor = Color.White;//Ultima linie de tot. e ok
+
                                         }
                                         else if (column < columns.Count - 1)
                                         {
