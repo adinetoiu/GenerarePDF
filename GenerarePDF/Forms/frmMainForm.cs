@@ -204,16 +204,7 @@ namespace GenerarePDF
                         double lastHeigth = 300f;
                         double tableHeight = 0;
 
-                        float totalTrips = 0;
-                        float totalAdvancedAndDeductions = 0;
-                        float totalCredits = 0;
-                        float totalScheduledDeductions = 0;
                         float totalCheckAmount = 0;
-
-                        double lastTotalLeft = 0;
-                        double lastTotalTop = 0;
-                        double lastTotalWidth = 0;
-
                         for (int j = panelMain.Controls.Count - 1; j >= 0; j--)
                         {
                             var control = panelMain.Controls[j];
@@ -240,6 +231,7 @@ namespace GenerarePDF
                                 table.headerStyle.fontStyle = TableFontStyle.bold;
                                 table.headerStyle.backgroundColor = Color.LightGray;
 
+                                float totalTable = 0;
                                 for (int row = 0; row < rows.Count; row++)
                                 {
                                     if (string.IsNullOrEmpty(rows[row][columns.Count - 1]))
@@ -258,24 +250,8 @@ namespace GenerarePDF
                                         if (columns[column].Name.Equals("Amount"))
                                         {
                                             var cel = table.cell(row, column);
-                                            if (header.Contains("Trips"))
-                                            {
-                                                cel.style.fontStyle = TableFontStyle.bold;
-                                                totalTrips += float.Parse(rows[row][column]);
-                                            }
-                                            if (header.Contains("Advances"))
-                                            {
-                                                totalAdvancedAndDeductions += float.Parse(rows[row][column]);
-                                            }
-                                            if (header.Contains("Credits"))
-                                            {
-                                                totalCredits += float.Parse(rows[row][column]);
-                                            }
-                                            if (header.Contains("Scheduled"))
-                                            {
-                                                totalScheduledDeductions += float.Parse(rows[row][column]);
-                                            }
-
+                                            cel.style.fontStyle = TableFontStyle.bold;
+                                            totalTable += float.Parse(rows[row][column]);
                                             cel.SetValue("$" + rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
                                             cel.style.fontColor = Color.Black;
@@ -301,22 +277,7 @@ namespace GenerarePDF
                                     cell.style.fontStyle = TableFontStyle.bold;
                                     if (column == columns.Count - 1)
                                     {
-                                        if (header.Contains("Trips"))
-                                        {
-                                            cell.SetValue("$" + totalTrips.ToString());
-                                        }
-                                        if (header.Contains("Advances"))
-                                        {
-                                            cell.SetValue("$" + totalAdvancedAndDeductions.ToString());
-                                        }
-                                        if (header.Contains("Credits"))
-                                        {
-                                            cell.SetValue("$" + totalCredits.ToString());
-                                        }
-                                        if (header.Contains("Scheduled"))
-                                        {
-                                            cell.SetValue("$" + totalScheduledDeductions.ToString());
-                                        }
+                                        cell.SetValue("$" + totalTable.ToString());
                                         cell.style.textAlign = TextAlignment.center;
                                         cell.style.borderColor = Color.Black;
                                         cell.style.fontColor = Color.DarkRed;
@@ -330,25 +291,17 @@ namespace GenerarePDF
 
 
                                 #region Add Check Amount
+
+                                if ((control as ucTable).SeScade())
+                                {
+                                    totalCheckAmount -= totalTable;
+                                }
+                                else
+                                {
+                                    totalCheckAmount += totalTable;
+                                }
                                 if (j == 0)
                                 {
-                                    if (totalTrips > 0)
-                                    {
-                                        totalCheckAmount += totalTrips;
-                                    }
-                                    if (totalAdvancedAndDeductions > 0)
-                                    {
-                                        totalCheckAmount -= totalAdvancedAndDeductions;
-                                    }
-                                    if (totalCredits > 0)
-                                    {
-                                        totalCheckAmount += totalTrips;
-                                    }
-                                    if (totalScheduledDeductions > 0)
-                                    {
-                                        totalCheckAmount -= totalAdvancedAndDeductions;
-                                    }
-
                                     table.addRow();
 
                                     for (int column = 0; column < columns.Count - 1; column++)
@@ -394,7 +347,6 @@ namespace GenerarePDF
                                 table.style.borderBottomColor = Color.White;
                                 table.style.borderLeftColor = Color.White;
                                 document.Pages[0].Body.DrawTable(table, tableXStart, lastHeigth);
-
                             }
                             lastHeigth += tableHeight + 140;
                         }

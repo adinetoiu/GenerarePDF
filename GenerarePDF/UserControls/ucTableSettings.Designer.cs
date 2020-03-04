@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtHeader = new System.Windows.Forms.TextBox();
             this.btnRemoveGroup = new System.Windows.Forms.Button();
+            this.cmbSeScade = new System.Windows.Forms.ComboBox();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlTop.Controls.Add(this.cmbSeScade);
             this.pnlTop.Controls.Add(this.label1);
             this.pnlTop.Controls.Add(this.txtHeader);
             this.pnlTop.Controls.Add(this.btnRemoveGroup);
@@ -85,6 +87,18 @@
             this.btnRemoveGroup.UseVisualStyleBackColor = true;
             this.btnRemoveGroup.Click += new System.EventHandler(this.btnRemoveGroup_Click);
             // 
+            // cmbSeScade
+            // 
+            this.cmbSeScade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSeScade.FormattingEnabled = true;
+            this.cmbSeScade.Items.AddRange(new object[] {
+            "+",
+            "-"});
+            this.cmbSeScade.Location = new System.Drawing.Point(622, 3);
+            this.cmbSeScade.Name = "cmbSeScade";
+            this.cmbSeScade.Size = new System.Drawing.Size(70, 21);
+            this.cmbSeScade.TabIndex = 5;
+            // 
             // ucTableSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,5 +122,6 @@
         private System.Windows.Forms.Button btnRemoveGroup;
         private System.Windows.Forms.TextBox txtHeader;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbSeScade;
     }
 }

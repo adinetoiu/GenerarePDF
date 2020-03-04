@@ -19,6 +19,11 @@ namespace GenerarePDF.UserControls
             return txtHeader.Text;
         }
 
+        public bool SeScade()
+        {
+            return _table.SeScade;
+        }
+
         public List<ColumnSettings> GetColumns()
         {
             return _table.Columns;

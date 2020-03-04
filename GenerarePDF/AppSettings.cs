@@ -25,6 +25,7 @@ namespace GenerarePDF
     public class TableSettings
     {
         public string Header { get; set; }
+        public bool SeScade { get; set; }
         public List<ColumnSettings> Columns { get; set; }
 
         public TableSettings()

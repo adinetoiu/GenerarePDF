@@ -16,6 +16,11 @@ namespace GenerarePDF
         {
             TableSettings tableSettings = new TableSettings();
             tableSettings.Header = txtHeader.Text;
+            if (cmbSeScade.SelectedIndex < 0)
+            {
+                cmbSeScade.SelectedIndex = 0;
+            }
+            tableSettings.SeScade = Convert.ToBoolean(cmbSeScade.SelectedIndex);
             for (int i = grpName.Controls.Count - 1; i >= 0; i--)
             {
                 var control = grpName.Controls[i];
@@ -31,7 +36,9 @@ namespace GenerarePDF
         {
             if (tableSett != null)
             {
+                cmbSeScade.SelectedIndex = tableSett.SeScade ? 1 : 0;
                 txtHeader.Text = tableSett.Header;
+
                 foreach (var col in tableSett.Columns)
                 {
                     AddColumn(col);
@@ -114,5 +121,6 @@ namespace GenerarePDF
                 OnTableDeleted(this);
             }
         }
+
     }
 }
