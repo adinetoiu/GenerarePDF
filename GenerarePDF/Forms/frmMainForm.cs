@@ -18,7 +18,7 @@ namespace GenerarePDF
     public partial class frmMainForm : Form
     {
         public AppSettings _settings;
-        List<int> _tableIDs;
+        List<string> _tableIDs;
 
         public frmMainForm()
         {
@@ -48,7 +48,7 @@ namespace GenerarePDF
             }
         }
 
-        public void Init(List<int> tables)
+        public void Init(List<string> tables)
         {
             _tableIDs = tables;
         }
@@ -61,19 +61,7 @@ namespace GenerarePDF
 
             foreach (var table in _settings.Tables)
             {
-                if (table.Header.Contains("Trips") && _tableIDs.Contains(1))
-                {
-                    AddTable(table);
-                }
-                else if (table.Header.Contains("Advances") && _tableIDs.Contains(2))
-                {
-                    AddTable(table);
-                }
-                else if (table.Header.Contains("Scheduled") && _tableIDs.Contains(3))
-                {
-                    AddTable(table);
-                }
-                else if (table.Header.Contains("Credits") && _tableIDs.Contains(4))
+                if (_tableIDs.Contains(table.Header))
                 {
                     AddTable(table);
                 }
@@ -358,6 +346,7 @@ namespace GenerarePDF
                                     }
                                     if (totalScheduledDeductions > 0)
                                     {
+                                        totalCheckAmount -= totalAdvancedAndDeductions;
                                     }
 
                                     table.addRow();
@@ -409,44 +398,6 @@ namespace GenerarePDF
                             }
                             lastHeigth += tableHeight + 140;
                         }
-
-                        #region Total
-                        if (lastTotalWidth > 0)
-                        {
-
-                            //Table checkAmountTable = new Table(2);
-                            //checkAmountTable.width = lastTotalWidth;
-                            //checkAmountTable.DisplayHeader = false;
-                            //checkAmountTable.addRow();
-                            //var cel1 = checkAmountTable.cell(0, 0);
-                            //cel1.style.fontStyle = TableFontStyle.bold;
-                            //cel1.SetValue("Check Amount:");
-                            //cel1.style.textAlign = TextAlignment.center;
-                            //var cel2 = checkAmountTable.cell(0, 1);
-                            //cel2.style.fontStyle = TableFontStyle.bold;
-                            //cel2.style.fontColor = Color.DarkRed;
-                            //cel2.style.textAlign = TextAlignment.center;
-
-                            //if (totalTrips > 0)
-                            //{
-                            //    totalCheckAmount += totalTrips;
-                            //}
-                            //if (totalAdvancedAndDeductions > 0)
-                            //{
-                            //    totalCheckAmount += totalTrips;
-                            //}
-                            //if (totalCredits > 0)
-                            //{
-                            //}
-                            //if (totalScheduledDeductions > 0)
-                            //{
-                            //}
-
-                            //cel2.SetValue("$" + totalCheckAmount.ToString());
-                            //document.Pages[0].Body.DrawTable(checkAmountTable, lastTotalLeft, lastTotalTop + 50);
-                        }
-                        #endregion
-
                         #region footer
                         for (int i = 0; i < document.PageCount; i++)
                         {

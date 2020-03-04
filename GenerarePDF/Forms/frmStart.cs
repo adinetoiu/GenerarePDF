@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,19 +19,37 @@ namespace GenerarePDF.Forms
             InitializeComponent();
         }
 
+        private void frmStart_Load(object sender, EventArgs e)
+        {
+            AppSettings settings = new AppSettings();
+            string stringSettings = File.ReadAllText("appsettings.txt");
+            settings = JsonConvert.DeserializeObject<AppSettings>(stringSettings);
+
+            foreach (var header in settings.Tables)
+            {
+                checkedListBox1.Items.Add(header.Header.ToString());
+            }
+        }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
-            frmMainForm form = new frmMainForm();
-            List<int> tables = new List<int>();
-            foreach (var control in this.Controls)
+            List<string> headers = new List<string>();
+            foreach (var item in checkedListBox1.CheckedItems)
             {
-                if (control is CheckBox && (control as CheckBox).Checked)
-                {
-                    tables.Add(int.Parse((control as CheckBox).Tag.ToString()));
-                }
+                headers.Add(item.ToString());
             }
-            form.Init(tables);
-            form.ShowDialog();
+            frmMainForm form = new frmMainForm();
+            form.Init(headers);
+            form.FormClosed += Form_FormClosed;
+            form.Show();
+            this.Hide();
         }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
+
+
     }
 }
