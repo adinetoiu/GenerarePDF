@@ -171,7 +171,6 @@ namespace GenerarePDF
                         document.Pages.Delete(document.CurrentPage);
                         document.LoadPdf(ms, "");
 
-
                         #region Logo
                         TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
                         Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(Convert.FromBase64String(_settings.LogoBase64));
@@ -201,7 +200,7 @@ namespace GenerarePDF
                         document.Pages[0].Body.AddTextArea(new RectangleF(50, 165, 200, 200), _settings.LastDriver.Address, true);
                         #endregion
 
-                        double lastHeigth = 300f;
+                        double lastHeigth = 270;
                         double tableHeight = 0;
 
                         float totalCheckAmount = 0;
@@ -265,7 +264,6 @@ namespace GenerarePDF
                                             cel.style.borderColor = Color.Black;
                                         }
                                     }
-                                    tableHeight += 25;
                                 }
                                 int tableXStart = -60;
 
@@ -275,7 +273,13 @@ namespace GenerarePDF
                                 {
                                     var cell = table.cell(table.rowCount - 1, column);
                                     cell.style.fontStyle = TableFontStyle.bold;
-                                    if (column == columns.Count - 1)
+                                    if (column == columns.Count - 2)
+                                    {
+                                        cell.SetValue("Total:");
+                                        cell.style.textAlign = TextAlignment.right;
+                                        cell.style.borderColor = Color.Black;
+                                    }
+                                    else if (column == columns.Count - 1)
                                     {
                                         cell.SetValue("$" + totalTable.ToString());
                                         cell.style.textAlign = TextAlignment.center;
@@ -307,8 +311,8 @@ namespace GenerarePDF
                                     for (int column = 0; column < columns.Count - 1; column++)
                                     {
                                         var cell = table.cell(table.rowCount - 1, column);
-                                        cell.style.borderType = borderType.none;
-                                        cell.style.backgroundColor = Color.White;//Spatiu pentru ultimul tabel
+                                        cell.style.borderType = borderType.none;//Spatiu pentru ultimul tabel
+                                        //cell.style.backgroundColor = Color.White;
                                     }
                                     table.addRow();
 
@@ -317,16 +321,15 @@ namespace GenerarePDF
                                         if (column < columns.Count - 2)
                                         {
                                             var cell = table.cell(table.rowCount - 1, column);
-                                            cell.style.borderType = borderType.none;
-                                            cell.style.backgroundColor = Color.White;//Ultima linie de tot. e ok
-
+                                            cell.style.borderType = borderType.none;//Ultima linie de tot. e ok
+                                            //cell.style.backgroundColor = Color.White;
                                         }
                                         else if (column < columns.Count - 1)
                                         {
                                             var cel1 = table.cell(table.rowCount - 1, column);
                                             cel1.style.fontStyle = TableFontStyle.bold;
                                             cel1.SetValue("Check Amount:");
-                                            cel1.style.textAlign = TextAlignment.center;
+                                            cel1.style.textAlign = TextAlignment.right;
                                             cel1.style.borderColor = Color.Black;
                                         }
                                         else
@@ -344,12 +347,15 @@ namespace GenerarePDF
 
                                 #endregion
 
-                                table.style.borderBottomColor = Color.White;
-                                table.style.borderLeftColor = Color.White;
+                                //table.style.borderBottomColor = Color.White;
+                                //table.style.borderLeftColor = Color.White;
                                 document.Pages[0].Body.DrawTable(table, tableXStart, lastHeigth);
+                                lastHeigth += table.rowCount * 25 + 65;
                             }
-                            lastHeigth += tableHeight + 140;
+
                         }
+
+                        //end table
                         #region footer
                         for (int i = 0; i < document.PageCount; i++)
                         {
