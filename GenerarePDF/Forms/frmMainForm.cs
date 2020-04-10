@@ -226,10 +226,6 @@ namespace GenerarePDF
                                     continue;
                                 }
 
-                                document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
-                                document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
-                                document.CurrentPage.Body.AddTextArea(new RectangleF(-60, (int)lastHeigth - 20, 700, 20), header, true);
-
                                 Table table = new Table(columns.Count);
                                 table.width = 700;
                                 table.DisplayHeader = true;
@@ -351,6 +347,11 @@ namespace GenerarePDF
                                     currentPage = 1;
                                     lastHeigth = 0;
                                 }
+
+
+                                document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
+                                document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
+                                document.CurrentPage.Body.AddTextArea(new RectangleF(-60, (int)lastHeigth - 20, 700, 20), header, true);
 
                                 document.Pages[currentPage].Body.DrawTable(table, tableXStart, lastHeigth);
                                 lastHeigth += table.rowCount * 25 + 65;
