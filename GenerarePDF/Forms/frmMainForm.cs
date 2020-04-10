@@ -238,6 +238,9 @@ namespace GenerarePDF
                                 table.headerStyle.fontName = "Tahoma";
                                 table.headerStyle.fontStyle = TableFontStyle.bold;
                                 table.headerStyle.backgroundColor = Color.LightGray;
+                                table.style.borderBottomType = borderType.none;
+                                table.style.borderLeftType = borderType.none;
+                                table.style.borderRightType = borderType.none;
 
                                 float totalTable = 0;
                                 for (int row = 0; row < rows.Count; row++)
@@ -249,6 +252,10 @@ namespace GenerarePDF
                                     table.addRow();
                                     for (int column = 0; column < columns.Count; column++)
                                     {
+                                        Cell cell = table.cell(row, column);
+                                        cell.style.borderType = borderType.solid;
+                                        cell.style.borderWidth = 1;
+                                        cell.style.borderColor = Color.Black;
                                         if (row == 0)
                                         {
                                             table.column(column).width = table.width * (double)columns[column].Percentage / 100;
@@ -271,14 +278,14 @@ namespace GenerarePDF
                                             cel.SetValue("$" + rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
                                             cel.style.fontColor = Color.Black;
-                                            cel.style.borderColor = Color.Black;
+                                            cell.style.borderColor = Color.Black;
                                         }
                                         else
                                         {
                                             var cel = table.cell(row, column);
                                             cel.SetValue(rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
-                                            cel.style.borderColor = Color.Black;
+                                            cell.style.borderColor = Color.Black;
                                         }
                                     }
                                 }
@@ -294,20 +301,33 @@ namespace GenerarePDF
                                     {
                                         cell.SetValue("Total:");
                                         cell.style.textAlign = TextAlignment.right;
+                                        cell.style.borderType = borderType.solid;
+                                        cell.style.borderType = borderType.solid;
+                                        cell.style.borderWidth = 1;
                                         cell.style.borderColor = Color.Black;
                                     }
                                     else if (column == columns.Count - 1)
                                     {
                                         cell.SetValue("$" + totalTable.ToString());
                                         cell.style.textAlign = TextAlignment.center;
+                                        cell.style.borderType = borderType.solid;
+                                        cell.style.borderWidth = 1;
                                         cell.style.borderColor = Color.Black;
                                         cell.style.fontColor = Color.DarkRed;
+                                        cell.style.borderType = borderType.solid;
                                     }
                                     else
                                     {
                                         cell.style.borderType = borderType.none;
+                                        // cell.style.borderBottomColor = Color.White;
                                     }
                                 }
+                                //table.addRow();//???
+                                //for (int column = 0; column < columns.Count; column++)
+                                //{
+                                //    var cell = table.cell(table.rowCount - 1, column);
+                                //    cell.style.borderType = borderType.none;
+                                //}
                                 #endregion
 
 
@@ -321,50 +341,9 @@ namespace GenerarePDF
                                 {
                                     totalCheckAmount += totalTable;
                                 }
-                                if (j == 0)
-                                {
-                                    //table.addRow();
 
-                                    //for (int column = 0; column < columns.Count - 1; column++)
-                                    //{
-                                    //    var cell = table.cell(table.rowCount - 1, column);
-                                    //    cell.style.borderType = borderType.none;//Spatiu pentru ultimul tabel
-                                    //}
-                                    //table.addRow();
-
-                                    //for (int column = 0; column < columns.Count; column++)
-                                    //{
-                                    //    if (column < columns.Count - 2)
-                                    //    {
-                                    //        var cell = table.cell(table.rowCount - 1, column);
-                                    //        cell.style.borderType = borderType.none;//Ultima linie de tot. e ok
-                                    //        //cell.style.backgroundColor = Color.White;
-                                    //    }
-                                    //    else if (column < columns.Count - 1)
-                                    //    {
-                                    //        var cel1 = table.cell(table.rowCount - 1, column);
-                                    //        cel1.style.fontStyle = TableFontStyle.bold;
-                                    //        cel1.SetValue("Check Amount:");
-                                    //        cel1.style.textAlign = TextAlignment.right;
-                                    //        cel1.style.borderColor = Color.Black;
-                                    //    }
-                                    //    else
-                                    //    {
-                                    //        var cel2 = table.cell(table.rowCount - 1, column);
-                                    //        cel2.style.fontStyle = TableFontStyle.bold;
-                                    //        cel2.style.fontColor = Color.DarkRed;
-                                    //        cel2.style.textAlign = TextAlignment.center;
-                                    //        cel2.style.borderColor = Color.Black;
-                                    //        cel2.SetValue("$" + totalCheckAmount.ToString());
-                                    //        cel2.style.fontColor = Color.DarkRed;
-                                    //    }
-                                    //}
-                                }
 
                                 #endregion
-
-                                //table.style.borderBottomColor = Color.White;
-                                //table.style.borderLeftColor = Color.White;
                                 totalRowsCount += table.rowCount;
                                 if (totalRowsCount > 15 && currentPage == 0)
                                 {
