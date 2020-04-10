@@ -170,6 +170,7 @@ namespace GenerarePDF
                         var document = new PDFDocument(outputMs, options);
                         document.Pages.Delete(document.CurrentPage);
                         document.LoadPdf(ms, "");
+                        document.Pages.Insert(1);
 
                         #region Logo
                         TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
@@ -178,37 +179,45 @@ namespace GenerarePDF
                         logo.Width = 100;
                         logo.Height = 100;
                         logo.KeepAspectRatio = true;
-                        document.Pages[0].Body.AddImage(logo, -50, -20);
+                        document.CurrentPage.Body.AddImage(logo, -50, -20);
                         #endregion
 
                         #region Company Details
-                        document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
-                        document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 8.25);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(-50, 50, 200, 200), _settings.CompanyDetails, true);
+                        document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
+                        document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 8.25);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(-50, 50, 200, 200), _settings.CompanyDetails, true);
                         #endregion
 
                         #region Driver
-                        document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
-                        document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 14.25);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(480, -40, 200, 200), "Statement #" + txtStatement.Text, true);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(450, -20, 200, 200), _settings.LastDriver.Name, true);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(490, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
+                        document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
+                        document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Regular, 14.25);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(480, -40, 200, 200), "Statement #" + txtStatement.Text, true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(450, -20, 200, 200), _settings.LastDriver.Name, true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(490, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
 
-                        document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
-                        document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(50, 150, 200, 200), _settings.LastDriver.Name, true);
-                        document.Pages[0].Body.AddTextArea(new RectangleF(50, 165, 200, 200), _settings.LastDriver.Address, true);
+                        document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
+                        document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(50, 150, 200, 200), _settings.LastDriver.Name, true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(50, 165, 200, 200), _settings.LastDriver.Address, true);
                         #endregion
 
                         double lastHeigth = 270;
-                        double tableHeight = 0;
-
+                        double totalGridWidth = 0;
+                        double totalTableEndX = 0;
+                        int totalRowsCount = 0;
                         float totalCheckAmount = 0;
+                        int tabelIndex = 0;
+                        int currentPage = 0;
+                        int tableXStart = -60;
+                        double checkAmountWidth = 0;
+                        double checkAmountValueWidth = 0;
+
                         for (int j = panelMain.Controls.Count - 1; j >= 0; j--)
                         {
                             var control = panelMain.Controls[j];
                             if (control is ucTable)
                             {
+                                tabelIndex++;
                                 string header = (control as ucTable).GetHeader();
                                 List<ColumnSettings> columns = (control as ucTable).GetColumns();
                                 List<List<string>> rows = (control as ucTable).GetRowsValues();
@@ -217,9 +226,9 @@ namespace GenerarePDF
                                     continue;
                                 }
 
-                                document.Pages[0].Body.SetTextAlignment(TextAlign.Left);
-                                document.Pages[0].Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
-                                document.Pages[0].Body.AddTextArea(new RectangleF(-60, (int)lastHeigth - 20, 700, 20), header, true);
+                                document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
+                                document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
+                                document.CurrentPage.Body.AddTextArea(new RectangleF(-60, (int)lastHeigth - 20, 700, 20), header, true);
 
                                 Table table = new Table(columns.Count);
                                 table.width = 700;
@@ -245,6 +254,14 @@ namespace GenerarePDF
                                             table.column(column).width = table.width * (double)columns[column].Percentage / 100;
                                             table.column(column).header.SetValue(columns[column].Name);
                                             table.column(column).header.style.textAlign = TextAlignment.center;
+                                            if (column == columns.Count - 2)
+                                            {
+                                                checkAmountWidth = table.column(column).width;
+                                            }
+                                            if (column == columns.Count - 1)
+                                            {
+                                                checkAmountValueWidth = table.column(column).width;
+                                            }
                                         }
                                         if (columns[column].Name.Equals("Amount"))
                                         {
@@ -265,7 +282,7 @@ namespace GenerarePDF
                                         }
                                     }
                                 }
-                                int tableXStart = -60;
+
 
                                 #region Add row for total
                                 table.addRow();
@@ -306,54 +323,118 @@ namespace GenerarePDF
                                 }
                                 if (j == 0)
                                 {
-                                    table.addRow();
+                                    //table.addRow();
 
-                                    for (int column = 0; column < columns.Count - 1; column++)
-                                    {
-                                        var cell = table.cell(table.rowCount - 1, column);
-                                        cell.style.borderType = borderType.none;//Spatiu pentru ultimul tabel
-                                        //cell.style.backgroundColor = Color.White;
-                                    }
-                                    table.addRow();
+                                    //for (int column = 0; column < columns.Count - 1; column++)
+                                    //{
+                                    //    var cell = table.cell(table.rowCount - 1, column);
+                                    //    cell.style.borderType = borderType.none;//Spatiu pentru ultimul tabel
+                                    //}
+                                    //table.addRow();
 
-                                    for (int column = 0; column < columns.Count; column++)
-                                    {
-                                        if (column < columns.Count - 2)
-                                        {
-                                            var cell = table.cell(table.rowCount - 1, column);
-                                            cell.style.borderType = borderType.none;//Ultima linie de tot. e ok
-                                            //cell.style.backgroundColor = Color.White;
-                                        }
-                                        else if (column < columns.Count - 1)
-                                        {
-                                            var cel1 = table.cell(table.rowCount - 1, column);
-                                            cel1.style.fontStyle = TableFontStyle.bold;
-                                            cel1.SetValue("Check Amount:");
-                                            cel1.style.textAlign = TextAlignment.right;
-                                            cel1.style.borderColor = Color.Black;
-                                        }
-                                        else
-                                        {
-                                            var cel2 = table.cell(table.rowCount - 1, column);
-                                            cel2.style.fontStyle = TableFontStyle.bold;
-                                            cel2.style.fontColor = Color.DarkRed;
-                                            cel2.style.textAlign = TextAlignment.center;
-                                            cel2.style.borderColor = Color.Black;
-                                            cel2.SetValue("$" + totalCheckAmount.ToString());
-                                            cel2.style.fontColor = Color.DarkRed;
-                                        }
-                                    }
+                                    //for (int column = 0; column < columns.Count; column++)
+                                    //{
+                                    //    if (column < columns.Count - 2)
+                                    //    {
+                                    //        var cell = table.cell(table.rowCount - 1, column);
+                                    //        cell.style.borderType = borderType.none;//Ultima linie de tot. e ok
+                                    //        //cell.style.backgroundColor = Color.White;
+                                    //    }
+                                    //    else if (column < columns.Count - 1)
+                                    //    {
+                                    //        var cel1 = table.cell(table.rowCount - 1, column);
+                                    //        cel1.style.fontStyle = TableFontStyle.bold;
+                                    //        cel1.SetValue("Check Amount:");
+                                    //        cel1.style.textAlign = TextAlignment.right;
+                                    //        cel1.style.borderColor = Color.Black;
+                                    //    }
+                                    //    else
+                                    //    {
+                                    //        var cel2 = table.cell(table.rowCount - 1, column);
+                                    //        cel2.style.fontStyle = TableFontStyle.bold;
+                                    //        cel2.style.fontColor = Color.DarkRed;
+                                    //        cel2.style.textAlign = TextAlignment.center;
+                                    //        cel2.style.borderColor = Color.Black;
+                                    //        cel2.SetValue("$" + totalCheckAmount.ToString());
+                                    //        cel2.style.fontColor = Color.DarkRed;
+                                    //    }
+                                    //}
                                 }
 
                                 #endregion
 
                                 //table.style.borderBottomColor = Color.White;
                                 //table.style.borderLeftColor = Color.White;
-                                document.Pages[0].Body.DrawTable(table, tableXStart, lastHeigth);
+                                totalRowsCount += table.rowCount;
+                                if (totalRowsCount > 15 && currentPage == 0)
+                                {
+                                    document.SetCurrentPage(1);
+                                    currentPage = 1;
+                                    lastHeigth = 0;
+                                }
+
+                                document.Pages[currentPage].Body.DrawTable(table, tableXStart, lastHeigth);
                                 lastHeigth += table.rowCount * 25 + 65;
+                                totalGridWidth = table.column(table.columnCount - 1).width + table.column(table.columnCount - 2).width;
+                                totalTableEndX = 0;
+                                for (int i = 0; i <= table.columnCount - 3; i++)
+                                {
+                                    totalTableEndX += table.column(i).width;
+                                }
                             }
 
                         }
+
+                        //???
+                        Table tableTOTAL = new Table(2);
+                        tableTOTAL.width = totalGridWidth;
+                        tableTOTAL.DisplayHeader = false;
+                        tableTOTAL.headerStyle.fontStyle = TableFontStyle.bold;
+                        tableTOTAL.headerStyle.fontSize = 8.5;
+                        tableTOTAL.headerStyle.fontName = "Tahoma";
+                        tableTOTAL.headerStyle.fontStyle = TableFontStyle.bold;
+                        tableTOTAL.headerStyle.backgroundColor = Color.LightGray;
+                        tableTOTAL.column(0).width = checkAmountWidth;
+                        tableTOTAL.column(1).width = checkAmountValueWidth;
+
+                        tableTOTAL.addRow();
+
+                        var cellTotalAmount = tableTOTAL.cell(tableTOTAL.rowCount - 1, 0);
+                        cellTotalAmount.style.fontStyle = TableFontStyle.bold;
+                        cellTotalAmount.SetValue("Check Amount:");
+                        cellTotalAmount.style.textAlign = TextAlignment.right;
+                        cellTotalAmount.style.borderColor = Color.Black;
+
+                        var cellTotalValue = tableTOTAL.cell(tableTOTAL.rowCount - 1, 1);
+                        cellTotalValue.style.fontStyle = TableFontStyle.bold;
+                        cellTotalValue.style.fontColor = Color.DarkRed;
+                        cellTotalValue.style.textAlign = TextAlignment.center;
+                        cellTotalValue.style.borderColor = Color.Black;
+                        cellTotalValue.SetValue("$" + totalCheckAmount.ToString());
+                        cellTotalValue.style.fontColor = Color.DarkRed;
+
+                        lastHeigth -= 28;
+
+
+                        //double pageHeigth = document.PageSetupInfo.PageHeight - document.PageSetupInfo.TopMargin - document.PageSetupInfo.BottomMargin;
+                        //if (totalRowsCount <= 15)
+                        //{
+                        document.CurrentPage.Body.DrawTable(tableTOTAL, totalTableEndX + tableXStart, lastHeigth);
+                        //}
+                        //else if (totalRowsCount > 15 && totalRowsCount <= 18)
+                        //{
+                        //    document.Pages[1].Body.DrawTable(tableTOTAL, totalTableEndX, 300);
+                        //}
+                        //else //count >15
+                        //{
+                        //    double yPosition = (totalRowsCount - 15) * 24 + 20;
+                        //    document.Pages[1].Body.DrawTable(tableTOTAL, totalTableEndX, yPosition);
+                        //}
+
+
+
+                        //???
+
 
                         //end table
                         #region footer
