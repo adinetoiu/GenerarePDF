@@ -229,14 +229,18 @@ namespace GenerarePDF
                                 Table table = new Table(columns.Count);
                                 table.width = 700;
                                 table.DisplayHeader = true;
-                                table.headerStyle.fontStyle = TableFontStyle.bold;
-                                table.headerStyle.fontSize = 8.5;
-                                table.headerStyle.fontName = "Tahoma";
-                                table.headerStyle.fontStyle = TableFontStyle.bold;
-                                table.headerStyle.backgroundColor = Color.LightGray;
                                 table.style.borderBottomType = borderType.none;
                                 table.style.borderLeftType = borderType.none;
                                 table.style.borderRightType = borderType.none;
+
+                                table.headerStyle.borderType = borderType.solid;
+                                table.headerStyle.borderColor = Color.Black;
+                                table.headerStyle.borderWidth = 1;
+                                table.headerStyle.fontStyle = TableFontStyle.bold;
+                                table.headerStyle.fontSize = 8.5;
+                                table.headerStyle.fontName = "Tahoma";
+                                table.headerStyle.backgroundColor = Color.LightGray;
+ 
 
                                 float totalTable = 0;
                                 for (int row = 0; row < rows.Count; row++)
