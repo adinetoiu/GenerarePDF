@@ -76,11 +76,11 @@ namespace GenerarePDF.UserControls
         private void AddRow()
         {
             ucRowTable row = new ucRowTable();
-            row.Init(_table);
-            row.OnRowDeleted += Row_OnRowDeleted;
             pnlContainer.Controls.Add(row);
+            row.OnRowDeleted += Row_OnRowDeleted;
             row.BringToFront();
             row.Dock = DockStyle.Top;
+            row.Init(_table);
         }
 
         private void Row_OnRowDeleted(ucRowTable item)

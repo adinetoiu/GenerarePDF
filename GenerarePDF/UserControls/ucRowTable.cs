@@ -42,6 +42,7 @@ namespace GenerarePDF
 
         internal void Init(TableSettings table)
         {
+            tlpColumns.ColumnCount = table.Columns.Count;
             tlpColumns.ColumnStyles.Clear();
             tlpColumns.RowStyles.Clear();
             for (int i = 0; i < table.Columns.Count; i++)
