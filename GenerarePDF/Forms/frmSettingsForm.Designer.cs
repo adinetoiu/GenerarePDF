@@ -34,6 +34,7 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtSoftwareProvider = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCompanyDetails = new System.Windows.Forms.TextBox();
@@ -49,6 +50,7 @@
             this.colDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDriver = new System.Windows.Forms.Button();
+            this.txtUnits = new System.Windows.Forms.TextBox();
             this.pnlBotton.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -65,17 +67,19 @@
             this.pnlBotton.Controls.Add(this.btnAddTable);
             this.pnlBotton.Controls.Add(this.btnSave);
             this.pnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBotton.Location = new System.Drawing.Point(0, 514);
+            this.pnlBotton.Location = new System.Drawing.Point(0, 792);
+            this.pnlBotton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlBotton.Name = "pnlBotton";
-            this.pnlBotton.Size = new System.Drawing.Size(979, 46);
+            this.pnlBotton.Size = new System.Drawing.Size(1468, 70);
             this.pnlBotton.TabIndex = 3;
             // 
             // btnAddTable
             // 
             this.btnAddTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTable.Location = new System.Drawing.Point(785, 12);
+            this.btnAddTable.Location = new System.Drawing.Point(1178, 18);
+            this.btnAddTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAddTable.Name = "btnAddTable";
-            this.btnAddTable.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTable.Size = new System.Drawing.Size(112, 35);
             this.btnAddTable.TabIndex = 1;
             this.btnAddTable.Text = "Add Table";
             this.btnAddTable.UseVisualStyleBackColor = true;
@@ -84,9 +88,10 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(879, 12);
+            this.btnSave.Location = new System.Drawing.Point(1318, 18);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(112, 35);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -95,9 +100,10 @@
             // pnlContent
             // 
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContent.Location = new System.Drawing.Point(3, 3);
+            this.pnlContent.Location = new System.Drawing.Point(4, 5);
+            this.pnlContent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(965, 136);
+            this.pnlContent.Size = new System.Drawing.Size(1452, 209);
             this.pnlContent.TabIndex = 5;
             // 
             // tabControl1
@@ -107,78 +113,98 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(979, 514);
+            this.tabControl1.Size = new System.Drawing.Size(1468, 792);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtUnits);
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtSoftwareProvider);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.txtCompanyDetails);
             this.tabPage1.Controls.Add(this.lblCompanyDetails);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.pictureBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(971, 488);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(1460, 759);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Company";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(52, 481);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Unit #";
+            // 
             // txtSoftwareProvider
             // 
             this.txtSoftwareProvider.AcceptsReturn = true;
-            this.txtSoftwareProvider.Location = new System.Drawing.Point(155, 197);
+            this.txtSoftwareProvider.Location = new System.Drawing.Point(232, 303);
+            this.txtSoftwareProvider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSoftwareProvider.Multiline = true;
             this.txtSoftwareProvider.Name = "txtSoftwareProvider";
-            this.txtSoftwareProvider.Size = new System.Drawing.Size(450, 81);
+            this.txtSoftwareProvider.Size = new System.Drawing.Size(673, 122);
             this.txtSoftwareProvider.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 200);
+            this.label2.Location = new System.Drawing.Point(52, 308);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.Size = new System.Drawing.Size(134, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Software Provider";
             // 
             // txtCompanyDetails
             // 
             this.txtCompanyDetails.AcceptsReturn = true;
-            this.txtCompanyDetails.Location = new System.Drawing.Point(155, 71);
+            this.txtCompanyDetails.Location = new System.Drawing.Point(232, 109);
+            this.txtCompanyDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCompanyDetails.Multiline = true;
             this.txtCompanyDetails.Name = "txtCompanyDetails";
-            this.txtCompanyDetails.Size = new System.Drawing.Size(450, 100);
+            this.txtCompanyDetails.Size = new System.Drawing.Size(673, 152);
             this.txtCompanyDetails.TabIndex = 4;
             // 
             // lblCompanyDetails
             // 
             this.lblCompanyDetails.AutoSize = true;
-            this.lblCompanyDetails.Location = new System.Drawing.Point(35, 74);
+            this.lblCompanyDetails.Location = new System.Drawing.Point(52, 114);
+            this.lblCompanyDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCompanyDetails.Name = "lblCompanyDetails";
-            this.lblCompanyDetails.Size = new System.Drawing.Size(86, 13);
+            this.lblCompanyDetails.Size = new System.Drawing.Size(129, 20);
             this.lblCompanyDetails.TabIndex = 3;
             this.lblCompanyDetails.Text = "Company Details";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 15);
+            this.label1.Location = new System.Drawing.Point(52, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(45, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Logo";
             // 
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(155, 6);
+            this.pictureBox2.Location = new System.Drawing.Point(232, 9);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(65, 59);
+            this.pictureBox2.Size = new System.Drawing.Size(96, 90);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -189,10 +215,11 @@
             // 
             this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.pnlContent);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(971, 488);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(1460, 759);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tables";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -201,10 +228,11 @@
             // 
             this.tabPage3.Controls.Add(this.dataGridView1);
             this.tabPage3.Controls.Add(this.panel1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(971, 488);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage3.Size = new System.Drawing.Size(1460, 759);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Drivers";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -220,9 +248,11 @@
             this.colEdit,
             this.colDelete});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 5);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(965, 436);
+            this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.Size = new System.Drawing.Size(1452, 679);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -274,30 +304,43 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnDriver);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 439);
+            this.panel1.Location = new System.Drawing.Point(4, 684);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(965, 46);
+            this.panel1.Size = new System.Drawing.Size(1452, 70);
             this.panel1.TabIndex = 4;
             // 
             // btnDriver
             // 
             this.btnDriver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDriver.Location = new System.Drawing.Point(872, 5);
+            this.btnDriver.Location = new System.Drawing.Point(1314, 8);
+            this.btnDriver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDriver.Name = "btnDriver";
-            this.btnDriver.Size = new System.Drawing.Size(75, 23);
+            this.btnDriver.Size = new System.Drawing.Size(112, 35);
             this.btnDriver.TabIndex = 1;
             this.btnDriver.Text = "Add Driver";
             this.btnDriver.UseVisualStyleBackColor = true;
             this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
             // 
+            // txtUnits
+            // 
+            this.txtUnits.AcceptsReturn = true;
+            this.txtUnits.Location = new System.Drawing.Point(232, 481);
+            this.txtUnits.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtUnits.Multiline = true;
+            this.txtUnits.Name = "txtUnits";
+            this.txtUnits.Size = new System.Drawing.Size(663, 222);
+            this.txtUnits.TabIndex = 9;
+            // 
             // frmSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(979, 560);
+            this.ClientSize = new System.Drawing.Size(1468, 862);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pnlBotton);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings Form";
@@ -337,5 +380,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewButtonColumn colEdit;
         private System.Windows.Forms.DataGridViewButtonColumn colDelete;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtUnits;
     }
 }

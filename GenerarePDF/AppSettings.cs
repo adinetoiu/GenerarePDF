@@ -15,10 +15,13 @@ namespace GenerarePDF
         public string CompanyDetails { get; set; }
         public string SoftwareProvider { get; set; }
 
+        public List<string> Units { get; set; }
+
         public AppSettings()
         {
             Tables = new List<TableSettings>();
             Drivers = new List<Driver>();
+            Units = new List<string>();
         }
     }
 

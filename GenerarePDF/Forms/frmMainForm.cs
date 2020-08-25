@@ -67,6 +67,7 @@ namespace GenerarePDF
                 }
             }
             cmbDrivers.DataSource = _settings.Drivers;
+            cmbUnits.DataSource = _settings.Units;
             if (_settings.LastDriver != null)
             {
                 cmbDrivers.SelectedItem = _settings.Drivers.Find(p => p.ID == _settings.LastDriver.ID);
@@ -194,6 +195,7 @@ namespace GenerarePDF
                         document.CurrentPage.Body.AddTextArea(new RectangleF(480, -40, 200, 200), "Statement #" + txtStatement.Text, true);
                         document.CurrentPage.Body.AddTextArea(new RectangleF(450, -20, 200, 200), _settings.LastDriver.Name, true);
                         document.CurrentPage.Body.AddTextArea(new RectangleF(490, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(450, 25, 200, 200), cmbUnits.Text, true);
 
                         document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
                         document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
@@ -240,7 +242,7 @@ namespace GenerarePDF
                                 table.headerStyle.fontSize = 8.5;
                                 table.headerStyle.fontName = "Tahoma";
                                 table.headerStyle.backgroundColor = Color.LightGray;
- 
+
 
                                 float totalTable = 0;
                                 for (int row = 0; row < rows.Count; row++)

@@ -41,6 +41,7 @@ namespace GenerarePDF
 
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.DataSource = _settings.Drivers;
+            txtUnits.Text = string.Join(System.Environment.NewLine, _settings.Units.ToArray());
 
             foreach (var sett in settings.Tables)
             {
@@ -197,6 +198,8 @@ namespace GenerarePDF
             {
                 _settings.CompanyDetails = txtCompanyDetails.Text;
                 _settings.SoftwareProvider = txtSoftwareProvider.Text;
+                _settings.Units = txtUnits.Text.Split(new[] { Environment.NewLine },
+                    StringSplitOptions.None).ToList();
                 _settings.Tables.Clear();
                 for (int i = pnlContent.Controls.Count - 1; i >= 0; i--)
                 {
