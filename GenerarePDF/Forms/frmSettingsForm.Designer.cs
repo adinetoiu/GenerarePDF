@@ -34,7 +34,6 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtSoftwareProvider = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCompanyDetails = new System.Windows.Forms.TextBox();
@@ -50,7 +49,9 @@
             this.colDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDriver = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.txtUnits = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlBotton.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -59,6 +60,7 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBotton
@@ -111,6 +113,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -121,8 +124,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.txtUnits);
-            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtSoftwareProvider);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.txtCompanyDetails);
@@ -137,16 +138,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Company";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 481);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Unit #";
             // 
             // txtSoftwareProvider
             // 
@@ -322,15 +313,36 @@
             this.btnDriver.UseVisualStyleBackColor = true;
             this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.label3);
+            this.tabPage4.Controls.Add(this.txtUnits);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1460, 759);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Unit#";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // txtUnits
             // 
             this.txtUnits.AcceptsReturn = true;
-            this.txtUnits.Location = new System.Drawing.Point(232, 481);
+            this.txtUnits.Location = new System.Drawing.Point(123, 30);
             this.txtUnits.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUnits.Multiline = true;
             this.txtUnits.Name = "txtUnits";
             this.txtUnits.Size = new System.Drawing.Size(663, 222);
-            this.txtUnits.TabIndex = 9;
+            this.txtUnits.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 33);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Unit #";
             // 
             // frmSettingsForm
             // 
@@ -354,6 +366,8 @@
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -380,6 +394,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewButtonColumn colEdit;
         private System.Windows.Forms.DataGridViewButtonColumn colDelete;
+        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUnits;
     }

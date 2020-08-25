@@ -256,6 +256,7 @@ namespace GenerarePDF
                                     {
                                         Cell cell = table.cell(row, column);
                                         cell.style.borderType = borderType.solid;
+                                        cell.style.fontName = "Tahoma";
                                         cell.style.borderWidth = 1;
                                         cell.style.borderColor = Color.Black;
                                         if (row == 0)
@@ -276,6 +277,7 @@ namespace GenerarePDF
                                         {
                                             var cel = table.cell(row, column);
                                             cel.style.fontStyle = TableFontStyle.bold;
+                                            cel.style.fontName = "Tahoma";
                                             totalTable += float.Parse(rows[row][column]);
                                             cel.SetValue("$" + rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
@@ -287,6 +289,7 @@ namespace GenerarePDF
                                             var cel = table.cell(row, column);
                                             cel.SetValue(rows[row][column]);
                                             cel.style.textAlign = TextAlignment.center;
+                                            cel.style.fontName = "Tahoma";
                                             cell.style.borderColor = Color.Black;
                                         }
                                     }
@@ -299,6 +302,7 @@ namespace GenerarePDF
                                 {
                                     var cell = table.cell(table.rowCount - 1, column);
                                     cell.style.fontStyle = TableFontStyle.bold;
+                                    cell.style.fontName = "Tahoma";
                                     if (column == columns.Count - 2)
                                     {
                                         cell.SetValue("Total:");
@@ -387,12 +391,14 @@ namespace GenerarePDF
 
                         var cellTotalAmount = tableTOTAL.cell(tableTOTAL.rowCount - 1, 0);
                         cellTotalAmount.style.fontStyle = TableFontStyle.bold;
+                        cellTotalAmount.style.fontName = "Tahoma";
                         cellTotalAmount.SetValue("Check Amount:");
                         cellTotalAmount.style.textAlign = TextAlignment.right;
                         cellTotalAmount.style.borderColor = Color.Black;
 
                         var cellTotalValue = tableTOTAL.cell(tableTOTAL.rowCount - 1, 1);
                         cellTotalValue.style.fontStyle = TableFontStyle.bold;
+                        cellTotalValue.style.fontName = "Tahoma";
                         cellTotalValue.style.fontColor = Color.DarkRed;
                         cellTotalValue.style.textAlign = TextAlignment.center;
                         cellTotalValue.style.borderColor = Color.Black;
