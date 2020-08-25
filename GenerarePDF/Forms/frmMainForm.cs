@@ -195,7 +195,7 @@ namespace GenerarePDF
                         document.CurrentPage.Body.AddTextArea(new RectangleF(480, -40, 200, 200), "Statement #" + txtStatement.Text, true);
                         document.CurrentPage.Body.AddTextArea(new RectangleF(450, -20, 200, 200), _settings.LastDriver.Name, true);
                         document.CurrentPage.Body.AddTextArea(new RectangleF(490, 0, 200, 200), datCurrentDate.Value.ToString("MM/dd/yyyy"), true);
-                        document.CurrentPage.Body.AddTextArea(new RectangleF(450, 25, 200, 200), cmbUnits.Text, true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(430, 25, 200, 200), "Unit# " + cmbUnits.Text, true);
 
                         document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
                         document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
