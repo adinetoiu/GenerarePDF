@@ -30,6 +30,8 @@
         {
             this.panelMain = new System.Windows.Forms.Panel();
             this.pnlBotton = new System.Windows.Forms.Panel();
+            this.cmbUnits = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.datCurrentDate = new System.Windows.Forms.DateTimePicker();
             this.txtStatement = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,8 +41,7 @@
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.pnlContainer = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbUnits = new System.Windows.Forms.ComboBox();
+            this.btnImport = new System.Windows.Forms.Button();
             this.pnlBotton.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             // pnlBotton
             // 
             this.pnlBotton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBotton.Controls.Add(this.btnImport);
             this.pnlBotton.Controls.Add(this.cmbUnits);
             this.pnlBotton.Controls.Add(this.label3);
             this.pnlBotton.Controls.Add(this.datCurrentDate);
@@ -74,6 +76,31 @@
             this.pnlBotton.Name = "pnlBotton";
             this.pnlBotton.Size = new System.Drawing.Size(1924, 80);
             this.pnlBotton.TabIndex = 1;
+            // 
+            // cmbUnits
+            // 
+            this.cmbUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbUnits.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbUnits.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbUnits.DisplayMember = "Name";
+            this.cmbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUnits.FormattingEnabled = true;
+            this.cmbUnits.Location = new System.Drawing.Point(1584, 26);
+            this.cmbUnits.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbUnits.Name = "cmbUnits";
+            this.cmbUnits.Size = new System.Drawing.Size(194, 28);
+            this.cmbUnits.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1514, 31);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Unit #";
             // 
             // datCurrentDate
             // 
@@ -175,30 +202,16 @@
             this.pnlContainer.Size = new System.Drawing.Size(1924, 731);
             this.pnlContainer.TabIndex = 2;
             // 
-            // label3
+            // btnImport
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1514, 31);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Unit #";
-            // 
-            // cmbUnits
-            // 
-            this.cmbUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbUnits.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbUnits.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbUnits.DisplayMember = "Name";
-            this.cmbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUnits.FormattingEnabled = true;
-            this.cmbUnits.Location = new System.Drawing.Point(1584, 26);
-            this.cmbUnits.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmbUnits.Name = "cmbUnits";
-            this.cmbUnits.Size = new System.Drawing.Size(194, 28);
-            this.cmbUnits.TabIndex = 10;
+            this.btnImport.Location = new System.Drawing.Point(158, 28);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(112, 35);
+            this.btnImport.TabIndex = 11;
+            this.btnImport.Text = "Import";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // frmMainForm
             // 
@@ -236,6 +249,7 @@
         private System.Windows.Forms.DateTimePicker datCurrentDate;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbUnits;
+        private System.Windows.Forms.Button btnImport;
     }
 }
 

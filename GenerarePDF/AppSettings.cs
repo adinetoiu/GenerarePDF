@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PDFTech;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,5 +66,19 @@ namespace GenerarePDF
         {
 
         }
+    }
+
+    public class ExportData
+    {
+        public List<ExportTable> TableList { get; set; }
+        public ExportData()
+        {
+            TableList = new List<ExportTable>();
+        }
+        public class ExportTable
+        {
+            public List<List<string>> Rows { get; set; }
+        }
+
     }
 }

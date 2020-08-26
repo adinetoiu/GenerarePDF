@@ -160,6 +160,7 @@ namespace GenerarePDF
         {
             try
             {
+                ExportData exportdata = new ExportData();
                 byte[] pdfOutput = null;
                 byte[] pdfInput = File.ReadAllBytes("Template.pdf");
                 using (var ms = new MemoryStream(pdfInput))
@@ -199,8 +200,8 @@ namespace GenerarePDF
 
                         document.CurrentPage.Body.SetTextAlignment(TextAlign.Left);
                         document.CurrentPage.Body.SetActiveFont("Tahoma", PDFFontStyles.Bold, 10);
-                        document.CurrentPage.Body.AddTextArea(new RectangleF(50, 150, 200, 200), _settings.LastDriver.Name, true);
-                        document.CurrentPage.Body.AddTextArea(new RectangleF(50, 165, 200, 200), _settings.LastDriver.Address, true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(-27, 150, 200, 200), _settings.LastDriver.Name, true);
+                        document.CurrentPage.Body.AddTextArea(new RectangleF(-27, 165, 200, 200), _settings.LastDriver.Address, true);
                         #endregion
 
                         double lastHeigth = 270;
@@ -223,6 +224,9 @@ namespace GenerarePDF
                                 string header = (control as ucTable).GetHeader();
                                 List<ColumnSettings> columns = (control as ucTable).GetColumns();
                                 List<List<string>> rows = (control as ucTable).GetRowsValues();
+                                ExportData.ExportTable exportTabel = new ExportData.ExportTable();
+                                exportTabel.Rows = rows;
+                                exportdata.TableList.Add(exportTabel);
                                 if (rows == null || rows.Count == 0)
                                 {
                                     continue;
@@ -466,6 +470,13 @@ namespace GenerarePDF
                 {
                     MessageBox.Show("The file is already open!");
                 }
+
+                string exportString = JsonConvert.SerializeObject(exportdata);
+                if (!Directory.Exists("Export"))
+                {
+                    Directory.CreateDirectory("Export");
+                }
+                File.WriteAllText(string.Format("Export/{0}.txt", DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss")), exportString);
             }
             catch (Exception ex)
             {
@@ -473,6 +484,11 @@ namespace GenerarePDF
             }
         }
 
-
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+            }
+        }
     }
 }
