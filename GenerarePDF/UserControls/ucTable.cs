@@ -87,5 +87,20 @@ namespace GenerarePDF.UserControls
         {
             pnlContainer.Controls.Remove(item);
         }
+
+        internal void FillData(ExportData.ExportTable exportTable)
+        {
+            pnlContainer.Controls.Clear();
+            for (int i = 0; i <= exportTable.Rows.Count - 1; i++)
+            {
+                AddRow();
+                var control = pnlContainer.Controls[0];
+                var ucTablerow = control as ucRowTable;
+                if (ucTablerow != null)
+                {
+                    ucTablerow.FillData(exportTable.Rows[i]);
+                }
+            }
+        }
     }
 }

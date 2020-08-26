@@ -461,10 +461,11 @@ namespace GenerarePDF
                         pdfOutput = outputMs.ToArray();
                     }
                 }
+                string filename = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss");
                 try
                 {
-                    File.WriteAllBytes("out.pdf", pdfOutput);
-                    Process.Start("out.pdf");
+                    File.WriteAllBytes(filename + ".pdf", pdfOutput);
+                    Process.Start(filename + ".pdf");
                 }
                 catch (Exception ex)
                 {
@@ -476,7 +477,7 @@ namespace GenerarePDF
                 {
                     Directory.CreateDirectory("Export");
                 }
-                File.WriteAllText(string.Format("Export/{0}.txt", DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss")), exportString);
+                File.WriteAllText(string.Format("Export/{0}.txt", filename), exportString);
             }
             catch (Exception ex)
             {
@@ -486,8 +487,59 @@ namespace GenerarePDF
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog dialog = new OpenFileDialog())
+            try
             {
+                using (OpenFileDialog dialog = new OpenFileDialog())
+                {
+                    dialog.Filter = "Pdf Files|*.pdf";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filename = Path.GetFileNameWithoutExtension(Path.GetFileName(dialog.FileName));
+                        ExportData exportData = GetExportDataByFilename(filename);
+                        LoadForm(exportData);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void LoadForm(ExportData exportData)
+        {
+            int index = 0;
+            for (int i = panelMain.Controls.Count - 1; i >= 0; i--)
+            {
+                var control = panelMain.Controls[i];
+                var ucTable = control as ucTable;
+                if (ucTable != null)
+                {
+                    ucTable.FillData(exportData.TableList[index]);
+                    index++;
+                }
+            }
+        }
+
+        private ExportData GetExportDataByFilename(string filename)
+        {
+            try
+            {
+                var files = Directory.GetFiles("Export");
+                foreach (var file in files)
+                {
+                    if (file.Contains(filename))
+                    {
+                        string dataString = File.ReadAllText(file);
+                        var data = JsonConvert.DeserializeObject<ExportData>(dataString);
+                        return data;
+                    }
+                }
+                throw new Exception("No data found for: " + filename);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No data found for: " + filename);
             }
         }
     }

@@ -79,5 +79,24 @@ namespace GenerarePDF
                 OnRowDeleted(this);
             }
         }
+
+        internal void FillData(List<string> list)
+        {
+            int index = 0;
+            for (int i = 0; i <= tlpColumns.Controls.Count - 1; i++)
+            {
+                var control = tlpColumns.Controls[i];
+                if (control is TextBox)
+                {
+                    (control as TextBox).Text = list[index];
+                    index++;
+                }
+                else if (control is DateTimePicker)
+                {
+                    (control as DateTimePicker).Value = DateTime.Parse(list[index]);
+                    index++;
+                }
+            }
+        }
     }
 }
