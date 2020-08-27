@@ -481,7 +481,7 @@ namespace GenerarePDF
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message);
             }
         }
 
