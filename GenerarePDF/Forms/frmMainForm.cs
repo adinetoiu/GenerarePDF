@@ -283,7 +283,7 @@ namespace GenerarePDF
                                             cel.style.fontStyle = TableFontStyle.bold;
                                             cel.style.fontName = "Tahoma";
                                             totalTable += float.Parse(rows[row][column]);
-                                            cel.SetValue("$" + rows[row][column]);
+                                            cel.SetValue("$" + float.Parse(rows[row][column]).ToString("N"));
                                             cel.style.textAlign = TextAlignment.center;
                                             cel.style.fontColor = Color.Black;
                                             cell.style.borderColor = Color.Black;
@@ -318,7 +318,7 @@ namespace GenerarePDF
                                     }
                                     else if (column == columns.Count - 1)
                                     {
-                                        cell.SetValue("$" + totalTable.ToString());
+                                        cell.SetValue("$" + totalTable.ToString("N"));
                                         cell.style.textAlign = TextAlignment.center;
                                         cell.style.borderType = borderType.solid;
                                         cell.style.borderWidth = 1;
@@ -406,7 +406,7 @@ namespace GenerarePDF
                         cellTotalValue.style.fontColor = Color.DarkRed;
                         cellTotalValue.style.textAlign = TextAlignment.center;
                         cellTotalValue.style.borderColor = Color.Black;
-                        cellTotalValue.SetValue("$" + totalCheckAmount.ToString());
+                        cellTotalValue.SetValue("$" + totalCheckAmount.ToString("N"));
                         cellTotalValue.style.fontColor = Color.DarkRed;
 
                         lastHeigth -= 28;
